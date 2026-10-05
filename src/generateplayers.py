@@ -4,17 +4,18 @@ import sqlite3
 import random
 import checkfile
 import rewrite as re
-
+import playergen
 root = Path(__file__).resolve().parent
 
 
 def select_team_first_time():
+    playergen.populate()
     conn = sqlite3.connect(root/"config"/"players.db")
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM players")
     full_player_database = cursor.fetchall()
     reformatted_list = []
-    position_list = ["GK", "CB", "LB", "RB", "CDM", "CM", "CAM", "LM", "RM", "LW", "RW", "ST"]
+    position_list = ["GK", "CB", "LB", "RB", "CM", "CAM", "LM", "RM", "LW", "RW", "ST"]
     for player_tuple in full_player_database:
         player_dict = {
             "id": player_tuple[0],

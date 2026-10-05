@@ -71,7 +71,6 @@ def populate():
             "CB":0,
             "LB":0,
             "RB":0,
-            "CDM":0,
             "CM":0,
             "CAM":0,
             "LM":0,
@@ -84,9 +83,9 @@ def populate():
         for player in player_list:
             dict_keys = list(position_dict.keys())
             position = random.choice(dict_keys)
-            while position_dict[position] >= 17:
+            while position_dict[position] >= 18:
                 position = random.choice(dict_keys)
-            position_dict[position] += 1
+                position_dict[position] += 1
             print(position_dict)
             pace , shooting, passing, dribbling, defending, physical = random.randint(50, 100), random.randint(50, 100), random.randint(50, 100), random.randint(50, 100), random.randint(50, 100), random.randint(50, 100)
             ovr = (pace + shooting + passing + dribbling + defending + physical) // 6
