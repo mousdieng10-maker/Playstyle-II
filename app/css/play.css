@@ -1,0 +1,8 @@
+.playingScreen{
+    display:flex;
+    
+}
+.left-side{
+    display:flex;
+    flex-direction:column; 
+}
