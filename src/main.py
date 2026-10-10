@@ -10,6 +10,7 @@ from generateplayers import select_team_first_time
 root = Path(__file__).resolve().parent
 absolute_root = Path(__file__).resolve().parent.parent
 
+
 print(root)
 class Api():
     def __init__(self):
@@ -34,7 +35,8 @@ class Api():
                     "dribbling": player[6],
                     "defending": player[7],
                     "physical": player[8],
-                    "ovr": player[9]
+                    "ovr": player[9],
+                    "value": player[10]
                 }
                 all_players.append(player_dict)
             return all_players
@@ -46,9 +48,24 @@ class Api():
             return starting_eleven
 
 
+    def show_all_players(self):
+        import transfermarket
 
-
-
+        all_players = transfermarket.show_transfer_market() 
+        return all_players
+    def give_player_stats(self, player_dict):
+        stats_dict = {
+            "pace": player_dict.get("pace"),
+            "shooting": player_dict.get("shooting"),
+            "passing": player_dict.get("passing"),
+            "dribbling": player_dict.get("dribbling"),
+            "defending": player_dict.get("defending"),
+            "physical": player_dict.get("physical"),
+        }
+        return stats_dict
+    def find(self, letters):
+        import transfermarket
+        return transfermarket.search(letters)
 
 
 

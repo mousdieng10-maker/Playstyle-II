@@ -27,7 +27,8 @@ def select_team_first_time():
             "dribbling": player_tuple[6],
             "defending": player_tuple[7],
             "physical": player_tuple[8],
-            "ovr": player_tuple[9]
+            "ovr": player_tuple[9],
+            "value":player_tuple[10]
         }
         reformatted_list.append(player_dict)
     player_list = []
@@ -46,7 +47,7 @@ def select_team_first_time():
     cursor.execute('''CREATE TABLE IF NOT EXISTS starting_eleven 
                 
                     (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    id INTEGER PRIMARY KEY NOT NULL,
                     name TEXT NOT NULL,
                     position TEXT NOT NULL,
                     pace INTEGER NOT NULL,
@@ -55,15 +56,15 @@ def select_team_first_time():
                     dribbling INTEGER NOT NULL,
                     defending INTEGER NOT NULL,
                     physical INTEGER NOT NULL,
-                    ovr INTEGER NOT NULL
+                    ovr INTEGER NOT NULL,
+                    value INTEGER NOT NULL
                     )
                
                     ''')  
     for starters in player_list:
         
-        cursor.execute(f''' INSERT INTO starting_eleven (name, position, pace, shooting, passing, dribbling, defending, physical, ovr) VALUES (?,?,?,?,?,?,?,?,?) ''', (starters["name"], starters["position"], starters["pace"], starters["shooting"], starters["passing"], starters["dribbling"], starters["defending"], starters["physical"], starters["ovr"]))
+        cursor.execute(f''' INSERT INTO starting_eleven (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value) VALUES (?,?,?,?,?,?,?,?,?,?,?) ''', (starters["id"],starters["name"], starters["position"], starters["pace"], starters["shooting"], starters["passing"], starters["dribbling"], starters["defending"], starters["physical"], starters["ovr"], starters["value"]))
     conn.commit()
     return player_list
 
 
-select_team_first_time()

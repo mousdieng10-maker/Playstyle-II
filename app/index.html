@@ -17,7 +17,7 @@
         <div class="left-section">
             <div>
                  <h1 id="homeTitle">Playstyle <span style="color:rgb(80, 0, 80);">II</span></h1>
-                <h3 id="homeSlogan">Because fc27 is kinda ahh.</h3>
+                <h3 id="homeSlogan">Make your dream come true, get Lionel Ronaldo into your team.</h3>
             </div>
            
             <button id="enterBtn">Start</button>
@@ -31,6 +31,8 @@
         </div>
     </div>
     <div id="playingScreen">
+        <div style="display:flex; gap:20em; align-items: center;">
+            <h1 class="eleven-title">Your Starting Eleven</h1>
         <div class="left-side">
             <div class="attack">
                 <div class="player"><h3 id="LW"></h3></div>
@@ -55,10 +57,50 @@
                 <div class="player"><h3 id="GK"></h3></div>
             </div>
         </div>
-        <div class="right-size"></div>
+        </div>
+        
+        <div class="right-side">
+            <button class="play-button" id="transferBtn">Transfer Market.</button>
+            <button class="play-button" id="gameBtn">Play next game.</button>
+            <button class="play-button" id="trainingBtn">Training</button>
+            <button class="play-button" id="squadBtn">Manage Squad</button>
+            <button class="play-button" id="leagueBtn">See League table</button>
+
+        </div>
 
     </div>
 
+    <div id="transfermarket">
+        <div style="display:flex; flex-direction:column; gap:2em;">
+            <span class="info-sect"id="money">$30002000</span>
+            <span class="info-sect" id="team">11 Players</span>
+            <span class="info-sect" id="avgOvr">69 OVR</span>
+        </div>
+        
+        <div class="transfermarket">
+       
+        
+            <div style="display:flex; gap:2em;">
+            <div>
+                <h1 style="font-size:2.5em; color:purple;">Buy players, upgrade your team</h1>
+                <h3 style="color:rgba(0,0,0,.7)">Contrary to what neymar said, life ain't a gimmick, improve your team!</h3>
+            </div>
+            
+
+            <div>
+                <input class="search-bar"   style="margin-bottom:.4em;"placeholder="search for players here">
+                <div style="display:flex; gap:1em;"><span class="filter">All Positions</span><span class="filter">Age</span><span class="filter">Rating</span><span class="filter">Value</span></div>
+            </div>
+            </div>
+        
+        
+        <div id="transferDiv" class="player-find">
+
+        </div>
+        </div>
+        </div>
+
+    </div>
     <script type="module" src="script.js"></script>
 </body>
 </html>

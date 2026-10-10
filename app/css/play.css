@@ -1,5 +1,6 @@
 #playingScreen{
     display:flex;
+    flex-direction:column; 
     align-items:center;
     justify-content:center;
     width:100%;
@@ -20,10 +21,30 @@
     overflow:hidden;
     border:2px solid rgba(255, 255, 255, .8);
     border-radius:1rem;
-    background:linear-gradient(145deg, #398257, #246741);
+    background:linear-gradient(145deg, #733982, #572467);
     box-shadow:0 1rem 2rem rgba(21, 65, 41, .2);
 }
+.right-side{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:1em;
+}
+.play-button{
+    width:10em;
+    height:4em;
+    border-left:10px solid rgb(106, 2, 106);
+    border-top:10px solid rgb(106, 2, 106);
+    border-bottom:10px solid rgb(83, 0, 83);
+    border-right:10px solid rgb(85, 0, 85);
+    background:linear-gradient(75deg, purple, rgb(106, 2, 106));
+    color:white; 
+    font-size:2em;
+    border-radius:3em;
+    box-shadow:1px 1px 10px rgba(0, 0, 0, 0.288);
 
+
+}
 .left-side::before{
     position:absolute;
     z-index:0;
@@ -56,13 +77,23 @@
 
 .player{
     display:flex;
-    width:5em;
+    width:15em;
     height:5em;
-    border-radius:50%;
+    border-radius:3em;
+    display:flex;
+    justify-content:center; 
+    align-items:center;
     background:rgba(255,255,255,.5);
     backdrop-filter:blur(30px);
 }
 
+.eleven-title{
+    font-size:3em; 
+    padding:1em; 
+    border-bottom:2px solid purple;
+
+
+}
 
 
 @media (max-width:600px){

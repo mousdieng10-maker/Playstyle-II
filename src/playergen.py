@@ -83,13 +83,23 @@ def populate():
         for player in player_list:
             dict_keys = list(position_dict.keys())
             position = random.choice(dict_keys)
-            while position_dict[position] >= 18:
+            while position_dict[position] >= 25:
                 position = random.choice(dict_keys)
                 position_dict[position] += 1
             print(position_dict)
-            pace , shooting, passing, dribbling, defending, physical = random.randint(50, 100), random.randint(50, 100), random.randint(50, 100), random.randint(50, 100), random.randint(50, 100), random.randint(50, 100)
+            pace , shooting, passing, dribbling, defending, physical = random.randint(50, 99), random.randint(50, 99), random.randint(50, 99), random.randint(50, 99), random.randint(50, 99), random.randint(50, 99)
             ovr = (pace + shooting + passing + dribbling + defending + physical) // 6
-            
+            if 50 <= ovr <= 59:
+                fr_value = random.randint(10000000,12000000)
+            elif 60 <= ovr <= 69:
+                fr_value = random.randint(15000000,20000000)
+            elif 70 <= ovr <= 79:
+                fr_value = random.randint(55000000,60000000)
+            elif 80 <= ovr <= 89:
+                fr_value = random.randint(80000000,90000000)
+            elif 90 <= ovr <= 99:
+                fr_value = random.randint(150000000,200000000)
+
             player_dict = {
                 "name": player,
                 "position": position,
@@ -99,7 +109,8 @@ def populate():
                 "dribbling": dribbling,
                 "defending": defending,
                 "physical": physical,
-                "ovr": ovr
+                "ovr": ovr,
+                "value":fr_value
             }
             new_player_list.append(player_dict)
         cursor.execute('''
@@ -113,14 +124,15 @@ def populate():
                 dribbling INTEGER NOT NULL,
                 defending INTEGER NOT NULL,
                 physical INTEGER NOT NULL,
-                ovr INTEGER NOT NULL
+                ovr INTEGER NOT NULL,
+                value INTEGER NOT NULL
             )
 
 
 
         ''')
         for player in new_player_list:
-            cursor.execute(f''' INSERT INTO players (name, position, pace, shooting, passing, dribbling, defending, physical, ovr) VALUES (?,?,?,?,?,?,?,?,?) ''', (player["name"], player["position"], player["pace"], player["shooting"], player["passing"], player["dribbling"], player["defending"], player["physical"], player["ovr"]))
+            cursor.execute(f''' INSERT INTO players (name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value) VALUES (?,?,?,?,?,?,?,?,?,?) ''', (player["name"], player["position"], player["pace"], player["shooting"], player["passing"], player["dribbling"], player["defending"], player["physical"], player["ovr"], player["value"]))
 
         
         conn.commit()
