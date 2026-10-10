@@ -136,5 +136,5 @@ def populate():
 
         
         conn.commit()
-        re.write(root/"config"/"saved.json", {"saved":True})
+        re.write(root/"config"/"saved.json", {"saved":True, "budget":1500000})
 

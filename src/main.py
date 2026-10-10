@@ -66,7 +66,9 @@ class Api():
     def find(self, letters):
         import transfermarket
         return transfermarket.search(letters)
-
+    def return_budget(self):
+        data = checkfile.read(root/"config"/"saved.json")
+        return data.get("budget")
 
 
 

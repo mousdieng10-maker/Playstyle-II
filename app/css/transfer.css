@@ -18,14 +18,123 @@
     align-items:center;
     justify-content:center;
 }
+.stat{
+    padding-left:.5em; 
+    padding-right:.5em;
+    border-top:2px solid rgba(120, 0, 189, 0.2);
+    border-bottom:2px solid rgba(162, 0, 255, 0.2);
+    border-left:2px solid rgba(162, 0, 255, 0.2);
+    border-right:2px solid rgba(120, 0, 189, 0.2);
+    border-radius:.7em;
+}
 .filter{
-    padding:.3em; 
-    padding-left:.6em; 
-    padding-right:.6em; 
-    background:rgba(201, 0, 201, 0.137);
-    border:2px solid black;
-    border-radius:1em; 
-    
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:.55rem;
+    min-height:2.75rem;
+    padding:.65rem .9rem;
+    border:1px solid rgba(83, 34, 98, .15);
+    border-radius:.9rem;
+    background:rgba(255,255,255,.82);
+    color:#39233f;
+    font:600 .9rem "Outfit", sans-serif;
+    white-space:nowrap;
+    box-shadow:0 3px 10px rgba(49, 20, 58, .06);
+    transition:background .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+.filter > .fa-solid:not(.filter-chevron){
+    color:#78398c;
+}
+
+.filter-chevron{
+    margin-left:.15rem;
+    color:#8c7a91;
+    font-size:.7rem;
+}
+
+.filter:hover{
+    border-color:rgba(120, 57, 140, .45);
+    background:#fff;
+    box-shadow:0 6px 16px rgba(75, 33, 88, .12);
+    transform:translateY(-1px);
+}
+
+.search-bar:focus-visible{
+    outline:3px solid rgba(120, 57, 140, .24);
+    outline-offset:2px;
+}
+
+.market-toolbar{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:2rem;
+    width:100%;
+}
+
+.market-heading{
+    max-width:34rem;
+}
+
+.market-heading h1{
+    margin-bottom:.5rem;
+    color:#642a78;
+    font-size:clamp(1.7rem, 3vw, 2.5rem);
+    line-height:1.1;
+}
+
+.market-heading h3{
+    color:rgba(0,0,0,.62);
+    font-size:1rem;
+    font-weight:450;
+    line-height:1.5;
+}
+
+.market-controls{
+    display:flex;
+    flex:0 1 34rem;
+    flex-direction:column;
+    gap:.85rem;
+}
+
+.search-field{
+    display:flex;
+    align-items:center;
+    gap:.75rem;
+    min-height:3.25rem;
+    padding:0 1rem;
+    border:1px solid rgba(83, 34, 98, .15);
+    border-radius:1rem;
+    background:#fff;
+    color:#78398c;
+    box-shadow:0 5px 18px rgba(49, 20, 58, .07);
+}
+
+.search-field > i{
+    font-size:.95rem;
+}
+
+.search-bar{
+    width:100%;
+    height:3.1rem;
+    padding:0;
+    border:0;
+    outline:none;
+    background:transparent;
+    color:#241b27;
+    font:500 .95rem "Outfit", sans-serif;
+}
+
+.search-bar::placeholder{
+    color:#9b909e;
+}
+
+.filter-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:.55rem;
 }
 
 .info-sect{
@@ -38,7 +147,7 @@
 }
 
 .transfer-div{
-    padding:3em; 
+    padding:2em; 
     display:flex;
     flex-direction:column; 
     align-items:center;
@@ -71,17 +180,6 @@
     overflow-y:scroll;
 
 }        
-.search-bar{
-    width:100%;
-    height:5em; 
-    border:none;
-    padding:1em; 
-    border-radius:2em;
-    background:rgba(0,0,0,.4);
-    color:white; 
-}
-
-
 .temp-profile{
     width:40%;
     height:90%;
@@ -93,4 +191,26 @@
     display:flex; 
     flex-direction:column;
     gap:1em;
+}
+
+@media (max-width: 900px){
+    .market-toolbar{
+        flex-direction:column;
+    }
+
+    .market-controls{
+        flex-basis:auto;
+        width:100%;
+    }
+}
+
+@media (max-width: 520px){
+    .filter-list{
+        display:grid;
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+    }
+
+    .filter{
+        justify-content:flex-start;
+    }
 }

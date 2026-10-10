@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <title>Playstyle II</title>
 </head>
 <body>
@@ -17,7 +18,7 @@
         <div class="left-section">
             <div>
                  <h1 id="homeTitle">Playstyle <span style="color:rgb(80, 0, 80);">II</span></h1>
-                <h3 id="homeSlogan">Make your dream come true, get Lionel Ronaldo into your team.</h3>
+                <h3 id="homeSlogan" style="font-size:.7em;">Make your dream come true, get Lionel Ronaldo into your team.</h3>
             </div>
            
             <button id="enterBtn">Start</button>
@@ -35,26 +36,26 @@
             <h1 class="eleven-title">Your Starting Eleven</h1>
         <div class="left-side">
             <div class="attack">
-                <div class="player"><h3 id="LW"></h3></div>
-                <div class="player"><h3 id="ST"></h3></div>
-                <div class="player"><h3 id="RW"></h3></div>
+                <div class="player"><span class="position-label" aria-hidden="true">LW</span><h3 id="LW"></h3></div>
+                <div class="player"><span class="position-label" aria-hidden="true">ST</span><h3 id="ST"></h3></div>
+                <div class="player"><span class="position-label" aria-hidden="true">RW</span><h3 id="RW"></h3></div>
 
             </div>
             <div class="midattack">
-                <div class="player"><h3 id="CAM"></h3></div>
+                <div class="player"><span class="position-label" aria-hidden="true">CAM</span><h3 id="CAM"></h3></div>
             </div>
             <div class="midfield">
-                <div class="player"><h3 id="LM"></h3></div>
-                <div class="player"><h3 id="CM"></h3></div>
-                <div class="player"><h3 id="RM"></h3></div>
+                <div class="player"><span class="position-label" aria-hidden="true">LM</span><h3 id="LM"></h3></div>
+                <div class="player"><span class="position-label" aria-hidden="true">CM</span><h3 id="CM"></h3></div>
+                <div class="player"><span class="position-label" aria-hidden="true">RM</span><h3 id="RM"></h3></div>
             </div>
             <div class="defence">
-                <div class="player"><h3 id="LB"></h3></div>
-                <div class="player"><h3 id="CB"></h3></div>
-                <div class="player"><h3 id="RB"></h3></div>
+                <div class="player"><span class="position-label" aria-hidden="true">LB</span><h3 id="LB"></h3></div>
+                <div class="player"><span class="position-label" aria-hidden="true">CB</span><h3 id="CB"></h3></div>
+                <div class="player"><span class="position-label" aria-hidden="true">RB</span><h3 id="RB"></h3></div>
             </div>
             <div class="keeper">
-                <div class="player"><h3 id="GK"></h3></div>
+                <div class="player"><span class="position-label" aria-hidden="true">GK</span><h3 id="GK"></h3></div>
             </div>
         </div>
         </div>
@@ -80,16 +81,24 @@
         <div class="transfermarket">
        
         
-            <div style="display:flex; gap:2em;">
-            <div>
-                <h1 style="font-size:2.5em; color:purple;">Buy players, upgrade your team</h1>
-                <h3 style="color:rgba(0,0,0,.7)">Contrary to what neymar said, life ain't a gimmick, improve your team!</h3>
+            <div class="market-toolbar">
+            <div class="market-heading">
+                <h1>Buy players, upgrade your team</h1>
+                <h3>Contrary to what neymar said, life ain't a gimmick, improve your team!</h3>
             </div>
             
 
-            <div>
-                <input class="search-bar"   style="margin-bottom:.4em;"placeholder="search for players here">
-                <div style="display:flex; gap:1em;"><span class="filter">All Positions</span><span class="filter">Age</span><span class="filter">Rating</span><span class="filter">Value</span></div>
+            <div class="market-controls">
+                <label class="search-field">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    <input class="search-bar" type="search" placeholder="Search players by name..." aria-label="Search players">
+                </label>
+                <div class="filter-list" aria-label="Player filters">
+                    <span class="filter"><i class="fa-solid fa-futbol" aria-hidden="true"></i><span>All positions</span><i class="fa-solid fa-chevron-down filter-chevron" aria-hidden="true"></i></span>
+                    <span class="filter"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i><span>Age</span><i class="fa-solid fa-chevron-down filter-chevron" aria-hidden="true"></i></span>
+                    <span class="filter"><i class="fa-solid fa-star" aria-hidden="true"></i><span>Rating</span><i class="fa-solid fa-chevron-down filter-chevron" aria-hidden="true"></i></span>
+                    <span class="filter"><i class="fa-solid fa-coins" aria-hidden="true"></i><span>Value</span><i class="fa-solid fa-chevron-down filter-chevron" aria-hidden="true"></i></span>
+                </div>
             </div>
             </div>
         

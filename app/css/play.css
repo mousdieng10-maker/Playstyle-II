@@ -73,18 +73,69 @@
     flex:1;
     align-items:center;
     justify-content:space-around;
+    gap:.35rem;
 }
 
 .player{
     display:flex;
-    width:15em;
-    height:5em;
-    border-radius:3em;
-    display:flex;
-    justify-content:center; 
     align-items:center;
-    background:rgba(255,255,255,.5);
-    backdrop-filter:blur(30px);
+    gap:.55rem;
+    width:clamp(5.25rem, 22vw, 10.5rem);
+    min-height:4.25rem;
+    padding:.5rem;
+    border:1px solid rgba(255,255,255,.82);
+    border-radius:1rem;
+    background:linear-gradient(145deg, rgba(255,255,255,.97), rgba(246,239,250,.91));
+    box-shadow:0 .55rem 1.2rem rgba(30,8,39,.2), inset 0 1px 0 #fff;
+    transition:transform .2s ease, box-shadow .2s ease;
+}
+
+.player:hover{
+    transform:translateY(-.2rem);
+    box-shadow:0 .8rem 1.5rem rgba(30,8,39,.28), inset 0 1px 0 #fff;
+}
+
+.position-label{
+    display:grid;
+    flex:0 0 2rem;
+    width:2rem;
+    height:2rem;
+    place-items:center;
+    border-radius:.65rem;
+    background:linear-gradient(145deg, #78398c, #4e1d61);
+    color:white;
+    font-size:.68rem;
+    font-weight:800;
+    letter-spacing:.02em;
+    box-shadow:0 .2rem .45rem rgba(56,20,71,.25);
+}
+
+.player h3{
+    min-width:0;
+    overflow:hidden;
+    color:#27152d;
+    font-size:clamp(.72rem, 1.1vw, .95rem);
+    font-weight:700;
+    line-height:1.2;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.attack .position-label{
+    background:linear-gradient(145deg, #dc7a42, #a53a35);
+}
+
+.midattack .position-label,
+.midfield .position-label{
+    background:linear-gradient(145deg, #4885aa, #245378);
+}
+
+.defence .position-label{
+    background:linear-gradient(145deg, #468c76, #24634f);
+}
+
+.keeper .position-label{
+    background:linear-gradient(145deg, #d0a33e, #9a6b16);
 }
 
 .eleven-title{
@@ -103,6 +154,20 @@
 
     .left-side{
         padding:1rem;
+    }
+
+    .player{
+        gap:.35rem;
+        min-height:3.75rem;
+        padding:.35rem;
+        border-radius:.8rem;
+    }
+
+    .position-label{
+        flex-basis:1.7rem;
+        width:1.7rem;
+        height:1.7rem;
+        font-size:.6rem;
     }
 
     .left-side::before{

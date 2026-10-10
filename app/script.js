@@ -85,16 +85,22 @@ async function renderPlayer(player){
         
         let statList = await window.pywebview.api.give_player_stats(player);   
         let playerPace = document.createElement("h3");
+        playerPace.className = "stat";
         playerPace.textContent =   `PAC: ${statList.pace}`
         let playerDribbling = document.createElement("h3");
+        playerDribbling.className = "stat";
         playerDribbling.textContent = `DRI: ${statList.dribbling}`
         let playerDefending = document.createElement("h3");
+        playerDefending.className = "stat";
         playerDefending.textContent  = `DEF: ${statList.defending}`
         let playerPhysical = document.createElement("h3");
+        playerPhysical.className = "stat";
         playerPhysical.textContent = `PHY: ${statList.physical}`
         let playerPassing = document.createElement("h3");
+        playerPassing.className = "stat";
         playerPassing.textContent = `PAS: ${statList.passing}`
         let playerShooting = document.createElement("h3");
+        playerShooting.className = "stat";
         playerShooting.textContent = `SHO: ${statList.shooting}`
         playerNameDiv.textContent = player.name;
         playerPosDiv.textContent = player.position
@@ -143,7 +149,9 @@ transferBtn.onclick = async function(){
     for(const player of playerDatabase){
         renderPlayer(player)
     }
+    money.textContent = await window.pywebview.api.return_budget();
     hide(generateScreen);
+
     show(transfermarket);
 }
 
@@ -158,5 +166,4 @@ searchPlayer.addEventListener("input",async ()=> {
         renderPlayer(result); 
     }
 })
-
 
