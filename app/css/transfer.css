@@ -172,8 +172,12 @@
 }
 .not-possible{
     cursor:none;
+     min-height:3rem;
+    padding:.75rem 1rem;
+    border:1px solid rgba(255, 255, 255, .35);
+    border-radius:.75rem;
     transition:none;
-    background:gray;
+    background-color:gray;
 }
 .options-show{
     display:flex;
@@ -278,7 +282,7 @@
     width:min(100%, 12rem);
 }
 
-.market-options button{
+.opt-btn{
     min-height:3rem;
     padding:.75rem 1rem;
     border:1px solid rgba(255, 255, 255, .35);

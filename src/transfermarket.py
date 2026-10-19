@@ -72,3 +72,29 @@ def find_in_eleven(player_to_buy):
             print(players)
             return players 
 
+def rotate(player, reciprocate):
+    conn = sqlite3.connect(root/"config"/"players.db")
+    cursor = conn.cursor()
+    cursor.execute(
+        "DELETE FROM starting_eleven WHERE id=?",
+        (reciprocate["id"],)
+    )
+    cursor.execute('''INSERT INTO starting_eleven 
+                    (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                    (
+                        player["id"],
+                        player["name"],
+                        player["position"],
+                        player["pace"],
+                        player["shooting"],
+                        player["passing"],
+                        player["dribbling"],
+                        player["defending"],
+                        player["physical"],
+                        player["ovr"],
+                        player["value"]
+                    ))
+    conn.commit()
+    conn.close()
+    

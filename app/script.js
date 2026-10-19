@@ -23,9 +23,7 @@ const marketBackBtn = find("#marketBackBtn");
 const inName = find('#inName');
 const outName = find('#outName');
 const commitBuyBtn = find('#commitBuyBtn');
-marketBackBtn.onclick = function(){
-    hide(marketSell);
-}
+
 
 hide(generateScreen);
 hide(playingScreen);
@@ -61,9 +59,7 @@ backButton.onclick = async function(){
     hide(transfermarket);
     show(playingScreen)
 }
-async function develop(player){
 
-}
 async function renderPlayer(player){
     let playerDiv  = document.createElement("div");
         let playerNameDiv = document.createElement("h2");
@@ -152,16 +148,43 @@ async function renderPlayer(player){
                     find("#outSho").textContent = `SHO: ${reciprocate.shooting}`;
                     find("#outPhy").textContent = `PHY: ${reciprocate.physical}`;
                     find("#outMarket").textContent = `Market Value: ${reciprocate.value}`;
-                    let findBudget = window.pywebview.api.find_budget(); 
+                    let findBudget = await window.pywebview.api.find_budget(); 
                     if(findBudget < player.value){
                         commitBuyBtn.className = "not-possible";
                         commitBuyBtn.textContent = "too expensive!";
                     }
                     show(marketSell); 
+                    marketBackBtn.onclick = function(){
+                        commitBuyBtn.className = "opt-btn";
+                        commitBuyBtn.textContent = "Commit Buy";
+                        hide(marketSell)
+                    }
+                    commitBuyBtn.onclick = async function(){
+                        await window.pywebview.api.sell_player(player, reciprocate)
+                        hide(marketSell);
+                        hide(transfermarket);
+                         const team = await window.pywebview.api.define_cards();
+                            for(const player of team){
+                                const playerName = find(`#${player.position}`);
+                                const playerCard = playerName.parentElement;
+                                const positionLabel = playerCard.querySelector(".position-label");
+                                const playerOVR = playerCard.querySelector(".player-ovr");
+                                let playerImg = document.createElement("img");
+
+                                playerName.textContent = player.name;
+                                positionLabel.textContent = player.position;
+                                playerCard.style.backgroundImage = `url(${player.link})`;
+                                playerOVR.textContent = `${player.ovr}`;
+                                
+                            }
+                            document.body.style.display = "block";
+                        show(playingScreen);
+                    }
                     
                 }
                 bBtn.onclick = function(){
                     hide(options);
+                    
                 }
                 negoBtn.onclick = async function(){
 

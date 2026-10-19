@@ -95,6 +95,10 @@ class Api():
         data = checkfile.read(root/"config"/"saved.json")
         budget = data.get("budget")
         return budget
+    def sell_player(self, player, reciprocate):
+        import transfermarket
+        transfermarket.rotate(player, reciprocate)
+        
 
 
 api = Api()
