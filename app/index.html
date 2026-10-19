@@ -17,13 +17,13 @@
     <div class="home-screen" id="homeScreen">
         <div class="left-section">
             <div>
-                 <h1 id="homeTitle">Playstyle <span style="color:rgb(80, 0, 80);">II</span></h1>
-                <h3 id="homeSlogan" style="font-size:.7em;">Make your dream come true, get Lionel Ronaldo into your team.</h3>
+                <img class="homebrand" src="assets\brand.png" alt="Playstyle II">
+
             </div>
            
             <button id="enterBtn">Start</button>
         </div>
-        <img id="homeimage" src="assets\adidas.png">
+        <img id="homeimage" src="assets\adidas.png" alt="">
     </div>
     <div id="generateScreen">
         <h2>Generating your team.</h2>
@@ -32,30 +32,30 @@
         </div>
     </div>
     <div id="playingScreen">
-        <div style="display:flex; gap:20em; align-items: center;">
+        <div class="starting-eleven">
             <h1 class="eleven-title">Your Starting Eleven</h1>
         <div class="left-side">
             <div class="attack">
-                <div class="player"><span class="position-label" aria-hidden="true">LW</span><h3 id="LW"></h3></div>
-                <div class="player"><span class="position-label" aria-hidden="true">ST</span><h3 id="ST"></h3></div>
-                <div class="player"><span class="position-label" aria-hidden="true">RW</span><h3 id="RW"></h3></div>
+                <div class="player"><span class="player-ovr"></span><img src="assets/silouhette.webp" class="profile-play"><span class="position-label"></span><h3 id="LW"></h3></div>
+                <div class="player"><span class="player-ovr"></span><img src="assets/silouhette.webp" class="profile-play"><span class="position-label"></span><h3 id="ST"></h3></div>
+                <div class="player"><span class="player-ovr"></span><img src="assets/silouhette.webp" class="profile-play"><span class="position-label"></span><h3 id="RW"></h3></div>
 
             </div>
             <div class="midattack">
-                <div class="player"><span class="position-label" aria-hidden="true">CAM</span><h3 id="CAM"></h3></div>
+                <div class="player"><span class="player-ovr"></span><img src="assets/silouhette.webp" class="profile-play"><span class="position-label"></span><h3 id="CAM"></h3></div>
             </div>
             <div class="midfield">
-                <div class="player"><span class="position-label" aria-hidden="true">LM</span><h3 id="LM"></h3></div>
-                <div class="player"><span class="position-label" aria-hidden="true">CM</span><h3 id="CM"></h3></div>
-                <div class="player"><span class="position-label" aria-hidden="true">RM</span><h3 id="RM"></h3></div>
+                <div class="player"><span class="player-ovr"></span><img src="assets/silouhette.webp" class="profile-play"><span class="position-label"></span><h3 id="LM"></h3></div>
+                <div class="player"><span class="player-ovr"></span><img src="assets/silouhette.webp" class="profile-play"><span class="position-label"></span><h3 id="CM"></h3></div>
+                <div class="player"><span class="player-ovr"></span><img src="assets/silouhette.webp" class="profile-play"><span class="position-label"></span><h3 id="RM"></h3></div>
             </div>
             <div class="defence">
-                <div class="player"><span class="position-label" aria-hidden="true">LB</span><h3 id="LB"></h3></div>
-                <div class="player"><span class="position-label" aria-hidden="true">CB</span><h3 id="CB"></h3></div>
-                <div class="player"><span class="position-label" aria-hidden="true">RB</span><h3 id="RB"></h3></div>
+                <div class="player"><span class="player-ovr"></span><img src="assets/silouhette.webp" class="profile-play"><span class="position-label"></span><h3 id="LB"></h3></div>
+                <div class="player"><span class="player-ovr"></span><img src="assets/silouhette.webp" class="profile-play"><span class="position-label"></span><h3 id="CB"></h3></div>
+                <div class="player"><span class="player-ovr"></span><img src="assets/silouhette.webp" class="profile-play"><span class="position-label"></span><h3 id="RB"></h3></div>
             </div>
             <div class="keeper">
-                <div class="player"><span class="position-label" aria-hidden="true">GK</span><h3 id="GK"></h3></div>
+                <div class="player"><span class="player-ovr"></span><span class="position-label"></span><h3 id="GK"></h3></div>
             </div>
         </div>
         </div>
@@ -72,6 +72,16 @@
     </div>
 
     <div id="transfermarket">
+        <div id="marketSell">
+            <div id="inCard"></div>
+            <div id="outCard"></div>
+        </div>
+        <div id="options">
+            <button id="buyBtn"class="option-btn">BUY</button>
+            <button id="negoBtn" class="option-btn">NEGOTIATE</button>
+            <button id="bBtn" class="option-btn"><i  class="fa-solid fa-arrow-left"></i></button>
+        </div>
+        <i id="backButton" class="fa-solid fa-arrow-left" aria-hidden="true"></i>
         <div style="display:flex; flex-direction:column; gap:2em;">
             <span class="info-sect"id="money">$30002000</span>
             <span class="info-sect" id="team">11 Players</span>

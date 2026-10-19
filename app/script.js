@@ -6,17 +6,6 @@ const leftSection = find(".left-section");
 const generateScreen = find("#generateScreen");
 const playingScreen = find("#playingScreen");
 
-const LW= find("#LW");
-const CAM= find("#CAM");
-const RW= find("#RW");
-const LM= find("#LM");
-const CM= find("#CM");
-const RM= find("#RM");
-const ST= find("#ST");
-const LB= find("#LB");
-const CB= find("#CB");
-const RB= find("#RB");
-const GK= find("#GK");
 const transferDiv = find("#transferDiv")
 const transferBtn = find("#transferBtn");
 const transfermarket = find("#transfermarket");
@@ -24,57 +13,46 @@ const money = find("#money");
 const team = find("#team");
 const avgOvr = find("#avgOvr");
 const searchPlayer = find(".search-bar"); 
-
+const backButton = find("#backButton");
+const options = find("#options");
+const buyBtn = find('#buyBtn');
+const negoBtn = find('#negoBtn');
+const bBtn = find('#bBtn');
+const marketSell = find("#marketSell");
 hide(generateScreen);
 hide(playingScreen);
 hide(transfermarket);
 
 enterButton.onclick = async function(){
     hide(homeScreen);
+    document.body.className = "background-do";
     show(generateScreen);
-    const team = await window.pywebview.api.generate_team();
+    const team = await window.pywebview.api.define_cards();
     for(const player of team){
-        let position = player.position;
-        if(position == "LW"){
-            LW.innerHTML = player.name;
+        const playerName = find(`#${player.position}`);
+        const playerCard = playerName.parentElement;
+        const positionLabel = playerCard.querySelector(".position-label");
+        const playerOVR = playerCard.querySelector(".player-ovr");
+        let playerImg = document.createElement("img");
 
-        }
-        else if(position == "CAM"){
-            CAM.textContent = player.name;
-        }
-        else if(position == "RW"){
-            RW.textContent = player.name;
-        }
-        else if(position == "LM"){
-            LM.textContent = player.name;
-        }
-        else if(position == "CM"){
-            CM.textContent = player.name;
-        }
-        else if(position == "RM"){
-            RM  .textContent = player.name;
-        }
-        else if(position == "ST"){
-            ST.textContent = player.name;
-        }
-        else if(position == "LB"){
-            LB.textContent = player.name;
-        }
-        else if(position == "CB"){
-            CB.textContent = player.name;
-        }
-        else if(position == "RB"){
-            RB.textContent = player.name;
-        }
-        else if(position == "GK"){
-            GK.textContent = player.name;
-        }
+        playerName.textContent = player.name;
+        positionLabel.textContent = player.position;
+        playerCard.style.backgroundImage = `url(${player.link})`;
+        playerOVR.textContent = `${player.ovr}`;
+        
     }
     document.body.style.display = "block"; 
     hide(generateScreen);
     show(playingScreen);
 }
 
+
+backButton.onclick = async function(){
+    // I need to make sure to come back here and add an initializing bridge between the js and python 
+    // otherwise the starting eleven will not be updated.
+    hide(transfermarket);
+    show(playingScreen)
+}
 async function renderPlayer(player){
     let playerDiv  = document.createElement("div");
         let playerNameDiv = document.createElement("h2");
@@ -110,7 +88,11 @@ async function renderPlayer(player){
         let rightSection = document.createElement("div");
         let statSection = document.createElement("span");
         leftSection.className = "temp-profile";
+        let playerImg = document.createElement("img"); 
+        playerImg.src = `assets/silouhette.webp`;
+        playerImg.className = 'profile'
         rightSection.className = "org-info"; 
+        leftSection.appendChild(playerImg); 
         priorityInfo.style.display = "flex";
         priorityInfo.style.gap = ".5em"; 
         statSection.style.display = "flex";
@@ -126,18 +108,30 @@ async function renderPlayer(player){
         statSection.appendChild(playerShooting);
         statSection.appendChild(playerPhysical);
         rightSection.appendChild(statSection);
-        playerValueDiv.style.color = "purple"; 
         rightSection.appendChild(playerValueDiv);
         playerDiv.className = "transfer-div"; 
         playerDiv.appendChild(leftSection);
         if(player.ovr >= 80){
-            playerDiv.style.color = "white"; 
             playerDiv.classList.add("platinum");
-            playerValueDiv.style.color = "gold"; 
         }
         playerDiv.appendChild(rightSection);
         transferDiv.appendChild(playerDiv);
+        playerDiv.onclick = async function(){
+            options.className = "options-show";
+            show(options)
+            buyBtn.onclick = async function(){
+                hide(options)
+                let reciprocate = window.pywebview.api.selling(player); 
+                show(marketSell); 
+            }
+            bBtn.onclick = function(){
+                hide(options);
+            }
+            negoBtn.onclick = async function(){
 
+            }
+
+        }
 
 }
 transferBtn.onclick = async function(){
@@ -166,4 +160,3 @@ searchPlayer.addEventListener("input",async ()=> {
         renderPlayer(result); 
     }
 })
-

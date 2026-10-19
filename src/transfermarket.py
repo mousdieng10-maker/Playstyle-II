@@ -62,3 +62,13 @@ def search(element):
     return search_dict
 
 
+def find_in_eleven(player_to_buy):
+    conn = sqlite3.connect(root/'config'/"players.db")
+    cursor = conn.cursor()
+    cursor.execute('''SELECT * FROM starting_eleven''')
+    all_players = reformat_tuple_list(cursor.fetchall())
+    for players in all_players:
+        if players.get('position') == player_to_buy.get('position'):
+            print(players)
+            return players 
+

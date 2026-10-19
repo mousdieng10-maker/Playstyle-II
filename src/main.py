@@ -47,7 +47,24 @@ class Api():
             re.write(root/"config"/"saved.json", data)
             return starting_eleven
 
+    def define_cards(self):
+        full_team = self.generate_team()
+        for player in full_team:
+            ovr = player["ovr"]
+            if 50 <= ovr < 65:
+                player_link = "assets/bronzeCard_transparent.png"
+            elif 65 <= ovr < 80:
+                player_link = "assets/goldCard_transparent.png"
+            elif 80 <= ovr < 89:
+                player_link = "assets/diamondCard_transparent.png"
+            elif 89 <= ovr <= 99:
+                player_link = "assets/rubyCard_transparent.png"
+            else:
+                player_link = ""
 
+            player["link"] = player_link
+        print(full_team)
+        return full_team 
     def show_all_players(self):
         import transfermarket
 
@@ -69,9 +86,11 @@ class Api():
     def return_budget(self):
         data = checkfile.read(root/"config"/"saved.json")
         return data.get("budget")
+    def selling(self, player_dict):
+        import transfermarket
+        recip_starter = transfermarket.find_in_eleven(player_dict)
 
-
-
+        return recip_starter
 
 
 
