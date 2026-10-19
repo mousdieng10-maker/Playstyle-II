@@ -91,7 +91,10 @@ class Api():
         recip_starter = transfermarket.find_in_eleven(player_dict)
 
         return recip_starter
-
+    def find_budget(self):
+        data = checkfile.read(root/"config"/"saved.json")
+        budget = data.get("budget")
+        return budget
 
 
 api = Api()

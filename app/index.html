@@ -18,7 +18,6 @@
         <div class="left-section">
             <div>
                 <img class="homebrand" src="assets\brand.png" alt="Playstyle II">
-
             </div>
            
             <button id="enterBtn">Start</button>
@@ -28,7 +27,6 @@
     <div id="generateScreen">
         <h2>Generating your team.</h2>
         <div class="loader">
-
         </div>
     </div>
     <div id="playingScreen">
@@ -72,9 +70,65 @@
     </div>
 
     <div id="transfermarket">
-        <div id="marketSell">
-            <div id="inCard"></div>
-            <div id="outCard"></div>
+        
+        <div class="market-sell" id="marketSell">
+            <h1>Warning, you are about to make a transfer.</h1>
+            <div class="player-sesh">
+
+            
+            <div id="playerIn">
+                <div class="player-in transfer-div">
+                    <div class="temp-profile">
+                        <img class="profile" src="assets/silouhette.webp" alt="">
+                    </div>
+                    <div class="org-info">
+                        <span>
+                            <h2 id="inName">Incoming Player</h2>
+                            <h1 id="inOvr">00</h1>
+                        </span>
+                        <span class="transfer-stats">
+                            <h3 class="stat" id="inPac"></h3>
+                            <h3 class="stat" id="inDri"></h3>
+                            <h3 class="stat" id="inDef"></h3>
+                            <h3 class="stat" id="inPas"></h3>
+                            <h3 class="stat" id="inSho"></h3>
+                            <h3 class="stat" id="inPhy"></h3>
+                        </span>
+                        <h3 id="inMarket">Market Value: --</h3>
+                    </div>
+                </div>
+            </div>
+            <span class="exchange-arrows" aria-hidden="true">
+                <i  id="greenen" class="fa-solid fa-arrow-right"></i>
+                <i  id="redden" class="fa-solid fa-arrow-left"></i>
+            </span>
+            <div id="playerOut">
+                <div class="transfer-div">
+                    <div class="temp-profile">
+                        <img class="profile" src="assets/silouhette.webp" alt="">
+                    </div>
+                    <div class="org-info">
+                        <span>
+                            <h2 id="outName">Outgoing Player</h2>
+                            <h1 id="outOVR">00</h1>
+                        </span>
+                        <span class="transfer-stats">
+                            <h3 class="stat" id="outPac"></h3>
+                            <h3 class="stat" id="outDri"></h3>
+                            <h3 class="stat" id="outDef"></h3>
+                            <h3 class="stat" id="outPas"></h3>
+                            <h3 class="stat" id="outSho"></h3>
+                            <h3 class="stat" id="outPhy"></h3>
+                        </span>
+                        <h3 id="outMarket">Market Value: --</h3>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="market-options">
+                <button id="commitBuyBtn">Commit Buy</button>
+                <button id="marketBackBtn">Back</button>
+            </div>
         </div>
         <div id="options">
             <button id="buyBtn"class="option-btn">BUY</button>

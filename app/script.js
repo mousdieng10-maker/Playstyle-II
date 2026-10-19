@@ -19,6 +19,14 @@ const buyBtn = find('#buyBtn');
 const negoBtn = find('#negoBtn');
 const bBtn = find('#bBtn');
 const marketSell = find("#marketSell");
+const marketBackBtn = find("#marketBackBtn");
+const inName = find('#inName');
+const outName = find('#outName');
+const commitBuyBtn = find('#commitBuyBtn');
+marketBackBtn.onclick = function(){
+    hide(marketSell);
+}
+
 hide(generateScreen);
 hide(playingScreen);
 hide(transfermarket);
@@ -52,6 +60,9 @@ backButton.onclick = async function(){
     // otherwise the starting eleven will not be updated.
     hide(transfermarket);
     show(playingScreen)
+}
+async function develop(player){
+
 }
 async function renderPlayer(player){
     let playerDiv  = document.createElement("div");
@@ -117,26 +128,55 @@ async function renderPlayer(player){
         playerDiv.appendChild(rightSection);
         transferDiv.appendChild(playerDiv);
         playerDiv.onclick = async function(){
-            options.className = "options-show";
-            show(options)
-            buyBtn.onclick = async function(){
-                hide(options)
-                let reciprocate = window.pywebview.api.selling(player); 
-                show(marketSell); 
-            }
-            bBtn.onclick = function(){
-                hide(options);
-            }
-            negoBtn.onclick = async function(){
+                options.className = "options-show";
+                show(options)
+                buyBtn.onclick = async function(){
+                    hide(options)
+                    const reciprocate = await window.pywebview.api.selling(player); 
+                    inName.textContent = player.name;
+                    find("#inOvr").textContent = player.ovr;
+                    find("#inPac").textContent = `PAC: ${statList.pace}`;
+                    find("#inDri").textContent = `DRI: ${statList.dribbling}`;
+                    find("#inDef").textContent = `DEF: ${statList.defending}`;
+                    find("#inPas").textContent = `PAS: ${statList.passing}`;
+                    find("#inSho").textContent = `SHO: ${statList.shooting}`;
+                    find("#inPhy").textContent = `PHY: ${statList.physical}`;
+                    find("#inMarket").textContent = `Market Value: ${player.value}`;
 
-            }
+                    outName.textContent = reciprocate.name; 
+                    find("#outOVR").textContent = reciprocate.ovr;
+                    find("#outPac").textContent = `PAC: ${reciprocate.pace}`;
+                    find("#outDri").textContent = `DRI: ${reciprocate.dribbling}`;
+                    find("#outDef").textContent = `DEF: ${reciprocate.defending}`;
+                    find("#outPas").textContent = `PAS: ${reciprocate.passing}`;
+                    find("#outSho").textContent = `SHO: ${reciprocate.shooting}`;
+                    find("#outPhy").textContent = `PHY: ${reciprocate.physical}`;
+                    find("#outMarket").textContent = `Market Value: ${reciprocate.value}`;
+                    let findBudget = window.pywebview.api.find_budget(); 
+                    if(findBudget < player.value){
+                        commitBuyBtn.className = "not-possible";
+                        commitBuyBtn.textContent = "too expensive!";
+                    }
+                    show(marketSell); 
+                    
+                }
+                bBtn.onclick = function(){
+                    hide(options);
+                }
+                negoBtn.onclick = async function(){
+
+                }
 
         }
+       
+        
 
 }
 transferBtn.onclick = async function(){
+    
     hide(playingScreen);
     show(generateScreen);
+    hide(marketSell);
     document.body.style.display = "flex"; 
     const playerDatabase = await window.pywebview.api.show_all_players();
     
