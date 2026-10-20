@@ -166,11 +166,7 @@ async function renderPlayer(player){
         // Selecting a player opens the buy/sell comparison and commit flow.
         playerDiv.onclick = async function(){
                 options.className = "options-show";
-                show(options)
-                buyBtn.onclick = async function(){
-                    hide(options)
-                    // Python determines which squad player would be exchanged.
-                    const reciprocate = await window.pywebview.api.selling(player); 
+                const reciprocate = await window.pywebview.api.selling(player); 
                     setText(".incoming-name", player.name);
                     setText(".incoming-ovr", player.ovr);
                     setText(".incoming-pace", `PAC: ${statList.pace}`);
@@ -189,7 +185,12 @@ async function renderPlayer(player){
                     setText(".outgoing-passing", `PAS: ${reciprocate.passing}`);
                     setText(".outgoing-shooting", `SHO: ${reciprocate.shooting}`);
                     setText(".outgoing-physical", `PHY: ${reciprocate.physical}`);
-                    setText(".outgoing-market", `Market Value: ${reciprocate.value}`);
+                    setText(".outgoing-market", `Market Value: ${reciprocate.value}`);  
+                show(options)
+                buyBtn.onclick = async function(){
+                    hide(options)
+                    // Python determines which squad player would be exchanged.
+                    
                     let findBudget = await window.pywebview.api.find_budget(); 
 
                     // Flag the purchase when the available budget is insufficient.

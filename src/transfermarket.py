@@ -45,21 +45,29 @@ def show_transfer_market():
 
 ''')
     databse = reformat_tuple_list(cursor.fetchall())
+    already = []
     for player in databse:
         if player.get("id") in id_list_data:
-            databse.remove(player)
+            already.append(player)
             print(f"{player.get("name")} removed from base.")
+    for player in already:
+        databse.remove(player)
     return databse
 
 def search(element):
     conn = sqlite3.connect(root/"config"/"players.db")
     cursor = conn.cursor()
+    cursor.execute('''SELECT id FROM starting_eleven''')
+    id_list = [element[0] for element in cursor.fetchall()]
     cursor.execute('''SELECT * FROM players''')
     all_players = reformat_tuple_list(cursor.fetchall())
     search_dict = []
     for players in all_players:
         if element.lower() in players.get("name").lower():
-            search_dict.append(players)
+            if players.get("id") in id_list:
+                pass
+            else:
+                search_dict.append(players)
     return search_dict
 
 
@@ -110,11 +118,14 @@ def return_pos(position):
 
             cursor.execute('''SELECT * FROM players WHERE position=?''', (position,))
             related_players = reformat_tuple_list(cursor.fetchall())
+            already = []
             for player in related_players:
                 if player in starting_eleven:
                     print(related_players)
-                    related_players.remove(player)
+                    already.append(player)
                     print(f"{player.get("name")} removed from specialized base.")
+            for player in already:
+                related_players.remove(player)
             return related_players
         else:
             cursor.execute('''SELECT * FROM players''')
