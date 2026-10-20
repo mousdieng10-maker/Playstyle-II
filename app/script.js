@@ -1,11 +1,20 @@
 import {find, findAll} from "./call.js";
 import {hide, show} from "./utils.js";
+
+
+
+
+
+
+
+
+
+// Cache the game screens and controls used by the event handlers below.
 const enterButton = find("#enterBtn");
 const homeScreen = find("#homeScreen");
 const leftSection = find(".left-section");
 const generateScreen = find("#generateScreen");
 const playingScreen = find("#playingScreen");
-
 const transferDiv = find("#transferDiv")
 const transferBtn = find("#transferBtn");
 const transfermarket = find("#transfermarket");
@@ -20,18 +29,34 @@ const negoBtn = find('#negoBtn');
 const bBtn = find('#bBtn');
 const marketSell = find("#marketSell");
 const marketBackBtn = find("#marketBackBtn");
-const inName = find('#inName');
-const outName = find('#outName');
 const commitBuyBtn = find('#commitBuyBtn');
+const filterPosition = find('#filterPosition');
+const textualFilter = find("#textual-filter");
+
+function setText(selector, text){
+    for(const element of findAll(selector)){
+        element.textContent = text;
+    }
+}
 
 
+
+let incr; 
+// Start with only the home screen visible.
 hide(generateScreen);
 hide(playingScreen);
 hide(transfermarket);
 
+
+
+
+
+
+// Ask Python for the starting lineup, then populate the pitch and show the game.
 enterButton.onclick = async function(){
     hide(homeScreen);
     document.body.className = "background-do";
+
     show(generateScreen);
     const team = await window.pywebview.api.define_cards();
     for(const player of team){
@@ -53,6 +78,13 @@ enterButton.onclick = async function(){
 }
 
 
+
+
+
+
+
+
+// Return from the transfer market to the current lineup.
 backButton.onclick = async function(){
     // I need to make sure to come back here and add an initializing bridge between the js and python 
     // otherwise the starting eleven will not be updated.
@@ -60,6 +92,13 @@ backButton.onclick = async function(){
     show(playingScreen)
 }
 
+
+
+
+
+
+
+// Build a transfer-market card with a player's details and stats from Python.
 async function renderPlayer(player){
     let playerDiv  = document.createElement("div");
         let playerNameDiv = document.createElement("h2");
@@ -123,32 +162,37 @@ async function renderPlayer(player){
         }
         playerDiv.appendChild(rightSection);
         transferDiv.appendChild(playerDiv);
+
+        // Selecting a player opens the buy/sell comparison and commit flow.
         playerDiv.onclick = async function(){
                 options.className = "options-show";
                 show(options)
                 buyBtn.onclick = async function(){
                     hide(options)
+                    // Python determines which squad player would be exchanged.
                     const reciprocate = await window.pywebview.api.selling(player); 
-                    inName.textContent = player.name;
-                    find("#inOvr").textContent = player.ovr;
-                    find("#inPac").textContent = `PAC: ${statList.pace}`;
-                    find("#inDri").textContent = `DRI: ${statList.dribbling}`;
-                    find("#inDef").textContent = `DEF: ${statList.defending}`;
-                    find("#inPas").textContent = `PAS: ${statList.passing}`;
-                    find("#inSho").textContent = `SHO: ${statList.shooting}`;
-                    find("#inPhy").textContent = `PHY: ${statList.physical}`;
-                    find("#inMarket").textContent = `Market Value: ${player.value}`;
+                    setText(".incoming-name", player.name);
+                    setText(".incoming-ovr", player.ovr);
+                    setText(".incoming-pace", `PAC: ${statList.pace}`);
+                    setText(".incoming-dribbling", `DRI: ${statList.dribbling}`);
+                    setText(".incoming-defending", `DEF: ${statList.defending}`);
+                    setText(".incoming-passing", `PAS: ${statList.passing}`);
+                    setText(".incoming-shooting", `SHO: ${statList.shooting}`);
+                    setText(".incoming-physical", `PHY: ${statList.physical}`);
+                    setText(".incoming-market", `Market Value: ${player.value}`);
 
-                    outName.textContent = reciprocate.name; 
-                    find("#outOVR").textContent = reciprocate.ovr;
-                    find("#outPac").textContent = `PAC: ${reciprocate.pace}`;
-                    find("#outDri").textContent = `DRI: ${reciprocate.dribbling}`;
-                    find("#outDef").textContent = `DEF: ${reciprocate.defending}`;
-                    find("#outPas").textContent = `PAS: ${reciprocate.passing}`;
-                    find("#outSho").textContent = `SHO: ${reciprocate.shooting}`;
-                    find("#outPhy").textContent = `PHY: ${reciprocate.physical}`;
-                    find("#outMarket").textContent = `Market Value: ${reciprocate.value}`;
+                    setText(".outgoing-name", reciprocate.name);
+                    setText(".outgoing-ovr", reciprocate.ovr);
+                    setText(".outgoing-pace", `PAC: ${reciprocate.pace}`);
+                    setText(".outgoing-dribbling", `DRI: ${reciprocate.dribbling}`);
+                    setText(".outgoing-defending", `DEF: ${reciprocate.defending}`);
+                    setText(".outgoing-passing", `PAS: ${reciprocate.passing}`);
+                    setText(".outgoing-shooting", `SHO: ${reciprocate.shooting}`);
+                    setText(".outgoing-physical", `PHY: ${reciprocate.physical}`);
+                    setText(".outgoing-market", `Market Value: ${reciprocate.value}`);
                     let findBudget = await window.pywebview.api.find_budget(); 
+
+                    // Flag the purchase when the available budget is insufficient.
                     if(findBudget < player.value){
                         commitBuyBtn.className = "not-possible";
                         commitBuyBtn.textContent = "too expensive!";
@@ -163,6 +207,7 @@ async function renderPlayer(player){
                         await window.pywebview.api.sell_player(player, reciprocate)
                         hide(marketSell);
                         hide(transfermarket);
+                         // Refresh the pitch after Python updates the squad.
                          const team = await window.pywebview.api.define_cards();
                             for(const player of team){
                                 const playerName = find(`#${player.position}`);
@@ -195,8 +240,16 @@ async function renderPlayer(player){
         
 
 }
+
+
+
+
+
+
+
+// Load the available players and budget before showing the transfer market.
 transferBtn.onclick = async function(){
-    
+    incr = 0;
     hide(playingScreen);
     show(generateScreen);
     hide(marketSell);
@@ -212,6 +265,12 @@ transferBtn.onclick = async function(){
     show(transfermarket);
 }
 
+
+
+
+
+
+// Replace the current results with players matching the search query.
 searchPlayer.addEventListener("input",async ()=> {
     transferDiv.innerHTML = ""
     let spinner = document.createElement("div");
@@ -223,3 +282,34 @@ searchPlayer.addEventListener("input",async ()=> {
         renderPlayer(result); 
     }
 })
+
+
+
+
+
+// List the positions supported by the generated squad and player database.
+filterPosition.onclick = async function(){
+    transferDiv.innerHTML = ""
+    let spinner = document.createElement("div"); 
+    spinner.className = "loader"; 
+    transferDiv.appendChild(spinner);
+    const positionList = ["GK", "CB", "LB", "RB", "CM", "CAM", "LM", "RM", "LW", "RW", "ST","all positions"];
+    let selectedPosition = positionList[incr];
+    textualFilter.textContent = selectedPosition;
+    const relatedPositions = await window.pywebview.api.find_position(selectedPosition); 
+    transferDiv.innerHTML = "";
+    if(relatedPositions.length > 0){
+        for(const result of relatedPositions){
+            renderPlayer(result);
+        }
+    }
+    else{
+        transferDiv.innerHTML = "No results found";
+    }
+    
+    incr += 1;
+    if(incr == positionList.length){
+        incr = 0;
+    }
+    
+}

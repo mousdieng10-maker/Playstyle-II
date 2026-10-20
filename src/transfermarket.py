@@ -39,6 +39,7 @@ def show_transfer_market():
 ''')
     all_players = cursor.fetchall()
     id_list_data = [spec_id[0] for spec_id in all_players]
+    print(id_list_data)
     cursor.execute('''
     SELECT * FROM players
 
@@ -98,3 +99,24 @@ def rotate(player, reciprocate):
     conn.commit()
     conn.close()
     
+
+def return_pos(position):
+        conn = sqlite3.connect(root/"config"/"players.db")
+        cursor = conn.cursor()
+        if position != "all positions":
+            
+            cursor.execute('''SELECT * FROM starting_eleven''')
+            starting_eleven = reformat_tuple_list(cursor.fetchall())
+
+            cursor.execute('''SELECT * FROM players WHERE position=?''', (position,))
+            related_players = reformat_tuple_list(cursor.fetchall())
+            for player in related_players:
+                if player in starting_eleven:
+                    print(related_players)
+                    related_players.remove(player)
+                    print(f"{player.get("name")} removed from specialized base.")
+            return related_players
+        else:
+            cursor.execute('''SELECT * FROM players''')
+            full_list = reformat_tuple_list(cursor.fetchall())
+            return full_list

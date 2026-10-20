@@ -98,7 +98,9 @@ class Api():
     def sell_player(self, player, reciprocate):
         import transfermarket
         transfermarket.rotate(player, reciprocate)
-        
+    def find_position(self, position):
+        import transfermarket
+        return transfermarket.return_pos(position)
 
 
 api = Api()

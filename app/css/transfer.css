@@ -184,20 +184,18 @@
     flex-direction:column;
     gap:.5em;
     width:100%;
+    background:rgba(0,0,0,.2);
+    backdrop-filter:blur(35px);
+    z-index:10;
     height:100%;
     position:absolute;
     justify-content:center;
     align-items:center;
 }
 .option-btn{
-    border:none; 
     padding:1em;
-    border-radius:.5em; 
     width:10em;
     height:3em; 
-    background-color:rgba(255,255,255,.2);
-    backdrop-filter:blur(50px);
-    color:black; 
 }
 
 .transfer-div{
@@ -262,8 +260,8 @@
     bottom:.1rem;
 }
 
-#playerIn,
-#playerOut{
+.player-in-section,
+.player-out-section{
     display:flex;
     flex:1 1 0;
     justify-content:center;
@@ -285,23 +283,45 @@
 .opt-btn{
     min-height:3rem;
     padding:.75rem 1rem;
-    border:1px solid rgba(255, 255, 255, .35);
-    border-radius:.75rem;
-    background:linear-gradient(135deg, #78398c, #4e1d61);
-    box-shadow:0 .35rem .8rem rgba(32, 12, 40, .22);
-    color:white;
-    font:700 .95rem "Outfit", sans-serif;
+}
+
+.option-btn,
+.opt-btn{
+    border:1px solid rgba(233, 221, 255, .62);
+    border-radius:999px;
+    background:linear-gradient(120deg, #8b5cf6, #5b27b6);
+    box-shadow:0 .55rem 1.5rem rgba(0, 0, 0, .35), 0 0 1.25rem rgba(139, 92, 246, .28);
+    color:#e9ddff;
+    font-family:Instrument Sans, sans-serif;
+    font-size:1rem;
+    font-weight:700;
     cursor:pointer;
-    transition:transform .18s ease, filter .18s ease;
+    transition:all .2s ease-in-out;
+}
+
+.option-btn:hover,
+.opt-btn:hover{
+    border-color:rgba(233, 221, 255, .62);
+    background:linear-gradient(120deg, #a879ff, #8b5cf6);
+    transform:translateY(-.15rem);
+    box-shadow:0 .8rem 1.8rem rgba(0, 0, 0, .4), 0 0 1.5rem rgba(139, 92, 246, .42);
 }
 
 .market-options button:hover{
-    filter:brightness(1.15);
-    transform:translateY(-2px);
+    filter:brightness(1.05);
 }
 
 .market-options button:active{
     transform:translateY(0);
+}
+
+.not-possible,
+.not-possible:hover{
+    border-color:rgba(255, 255, 255, .35);
+    background:gray;
+    box-shadow:none;
+    color:white;
+    transform:none;
 }
 
 .transfer-div:hover{
@@ -405,8 +425,8 @@
         overflow-y:auto;
     }
 
-    #playerIn,
-    #playerOut{
+    .player-in-section,
+    .player-out-section{
         flex:0 0 auto;
         width:100%;
     }
