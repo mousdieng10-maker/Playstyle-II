@@ -101,6 +101,10 @@ class Api():
     def find_position(self, position):
         import transfermarket
         return transfermarket.return_pos(position)
+    def transaction(self, value):
+        data = checkfile.read(root/"config"/"saved.json")
+        data["budget"] -= value 
+        re.write(root/"config"/"saved.json", data)
 
 
 api = Api()

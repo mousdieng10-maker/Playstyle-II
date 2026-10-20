@@ -32,7 +32,7 @@ const marketBackBtn = find("#marketBackBtn");
 const commitBuyBtn = find('#commitBuyBtn');
 const filterPosition = find('#filterPosition');
 const textualFilter = find("#textual-filter");
-
+const soldScreen = find("#soldScreen")
 function setText(selector, text){
     for(const element of findAll(selector)){
         element.textContent = text;
@@ -224,7 +224,13 @@ async function renderPlayer(player){
                                 
                             }
                             document.body.style.display = "block";
+                        await window.pywebview.api.transaction(player.value)
                         show(playingScreen);
+                        soldScreen.className = 'sold-true'; 
+                        setTimeout(() => {
+                            soldScreen.className = 'sold-screen';
+                        },2000);
+
                     }
                     
                 }
@@ -260,7 +266,8 @@ transferBtn.onclick = async function(){
     for(const player of playerDatabase){
         renderPlayer(player)
     }
-    money.textContent = await window.pywebview.api.return_budget();
+    let amount = await window.pywebview.api.return_budget();
+    money.textContent = `Current Budget: $${amount}`
     hide(generateScreen);
 
     show(transfermarket);
