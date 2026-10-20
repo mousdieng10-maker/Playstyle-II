@@ -1,15 +1,22 @@
 ﻿# Playstyle-II
 
-A simple ui based football manager simulator coded in python and javascript through the pywebview library.
+<h2>A simple ui based football manager simulator coded in python and javascript through the pywebview library.
+</h2>
 
-You are given a team of 11 players of... various abilities to put it nicely and it is up to you to bring your team to the top through clever transfers, training, and tactics (coming soon). 
+<h3>
+  You are given a team of 11 players of... various abilities to put it nicely and it is up to you to bring your team to the top through clever transfers, training, and tactics (coming soon). 
 But your funds are not infinite and neither is your player's stamina so management in necessary.
+</h3>
+
 
 You can:
-  sign players.
-  train your existing players. 
-  simulate games. 
-  attempt to win the league.
+<ul>
+  <li>sign players.</li>
+  <li>train your existing players. </li>
+  <li>simulate games.</li>
+  <li>attempt to win the league.</li>
+</ul>
+  
 
 
 
