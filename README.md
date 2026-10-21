@@ -16,6 +16,8 @@ You can:
   <li>simulate games.</li>
   <li>attempt to win the league.</li>
 </ul>
+
+<div style="padding:1em; border-radius:1em; width:30em; height:30em" box-shadow:1px 1px 10px black;></div>
   
 
 
