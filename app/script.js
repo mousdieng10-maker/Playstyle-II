@@ -58,6 +58,7 @@ enterButton.onclick = async function(){
     document.body.className = "background-do";
 
     show(generateScreen);
+    await window.pywebview.api.reload_classes();
     const team = await window.pywebview.api.define_cards();
     for(const player of team){
         const playerName = find(`#${player.position}`);
@@ -225,6 +226,7 @@ async function renderPlayer(player){
                             }
                             document.body.style.display = "block";
                         await window.pywebview.api.transaction(player.value)
+                        await window.pywebview.api.reload_classes();
                         show(playingScreen);
                         soldScreen.className = 'sold-true'; 
                         setTimeout(() => {
@@ -262,7 +264,7 @@ transferBtn.onclick = async function(){
     hide(marketSell);
     document.body.style.display = "flex"; 
     const playerDatabase = await window.pywebview.api.show_all_players();
-    
+    await window.pywebview.api.reload_classes();
     for(const player of playerDatabase){
         renderPlayer(player)
     }

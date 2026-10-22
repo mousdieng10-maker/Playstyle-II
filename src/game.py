@@ -24,7 +24,27 @@ class Player:
         self.physical = physical
         self.ovr = ovr
         self.value = value
-
+    def train(self):
+        stats_to_upg = ["pace","shooting","passing","dribbling","defending","physical"]
+        weights = {
+            "LW":[3,3,2,4,.5,1],
+            "RW":[3,3,2,4,.5,1],
+            "ST":[3,4,2,1.5,.3,2],
+            "CAM":[1.5,3.5,3,2.3,.8,1],
+            "CM":[1.5,1.5,3,2.5,2,2],
+            "LM":[2,2,3,1.5,2,2],
+            "RM":[2,2,3,1.5,2,2],
+            "CB":[2,.3,.1,.5,4,3],
+            "LB":[3,.5,1,1.5,3,2],
+            "RB":[3,.5,1,1.5,3,2],
+            "GK":[1,1,2,1,1,2]
+        }
+        weight_to_apply = weights.get(self.position)
+        upg = random.choices(stats_to_upg, weights=weight_to_apply, k=1)[0]
+        setattr(self, upg, getattr(self, upg)+2)
+        if getattr(self, upg) > 99:
+            setattr(self, upg, 99)
+        
 
 class Team:
     def __init__(self, team_objects):
@@ -41,4 +61,7 @@ def init_player_obj():
         obj_list.append(player_obj)
     team_obj = Team(obj_list)
     return team_obj
+
+
+
 

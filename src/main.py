@@ -9,7 +9,7 @@ from generateplayers import select_team_first_time
 
 root = Path(__file__).resolve().parent
 absolute_root = Path(__file__).resolve().parent.parent
-
+global_team = ""
 
 print(root)
 class Api():
@@ -92,7 +92,7 @@ class Api():
 
         return recip_starter
     def find_budget(self):
-        data = checkfile.read(root/"config"/"saved.json")
+        data = checkfile.read(root/"config"/"saved.json")   
         budget = data.get("budget")
         return budget
     def sell_player(self, player, reciprocate):
@@ -105,7 +105,11 @@ class Api():
         data = checkfile.read(root/"config"/"saved.json")
         data["budget"] -= value 
         re.write(root/"config"/"saved.json", data)
-
+    def reload_classes(self):
+        import game
+        global global_team
+        global_team  = game.init_player_obj()
+    def retrain_players
 
 api = Api()
 

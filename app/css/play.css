@@ -28,7 +28,7 @@
     border:2px solid white;
     padding:.3em;
     gap:.1em;
-    backdrop-filter:blur(50px);
+    
     width:40em;
 }
 .right-side{

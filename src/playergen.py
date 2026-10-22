@@ -110,7 +110,8 @@ def populate():
                 "defending": defending,
                 "physical": physical,
                 "ovr": ovr,
-                "value":fr_value
+                "value":fr_value,
+                "fitness": 100
             }
             new_player_list.append(player_dict)
         cursor.execute('''
@@ -125,14 +126,15 @@ def populate():
                 defending INTEGER NOT NULL,
                 physical INTEGER NOT NULL,
                 ovr INTEGER NOT NULL,
-                value INTEGER NOT NULL
+                value INTEGER NOT NULL,
+                fitness INTEGER NOT NULL, 
             )
 
 
 
         ''')
         for player in new_player_list:
-            cursor.execute(f''' INSERT INTO players (name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value) VALUES (?,?,?,?,?,?,?,?,?,?) ''', (player["name"], player["position"], player["pace"], player["shooting"], player["passing"], player["dribbling"], player["defending"], player["physical"], player["ovr"], player["value"]))
+            cursor.execute(f''' INSERT INTO players (name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness) VALUES (?,?,?,?,?,?,?,?,?,?,?) ''', (player["name"], player["position"], player["pace"], player["shooting"], player["passing"], player["dribbling"], player["defending"], player["physical"], player["ovr"], player["value"], player["fitness"]))
 
         
         conn.commit()
