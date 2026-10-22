@@ -28,7 +28,8 @@ def select_team_first_time():
             "defending": player_tuple[7],
             "physical": player_tuple[8],
             "ovr": player_tuple[9],
-            "value":player_tuple[10]
+            "value":player_tuple[10],
+            "fitness":player_tuple[11]
         }
         reformatted_list.append(player_dict)
     player_list = []
@@ -57,14 +58,15 @@ def select_team_first_time():
                     defending INTEGER NOT NULL,
                     physical INTEGER NOT NULL,
                     ovr INTEGER NOT NULL,
-                    value INTEGER NOT NULL
+                    value INTEGER NOT NULL,
+                    fitness INTEGER NOT NULL
                     )
                
                     ''')  
     for starters in player_list:
         
-        cursor.execute(f''' INSERT INTO starting_eleven (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value) VALUES (?,?,?,?,?,?,?,?,?,?,?) ''', (starters["id"],starters["name"], starters["position"], starters["pace"], starters["shooting"], starters["passing"], starters["dribbling"], starters["defending"], starters["physical"], starters["ovr"], starters["value"]))
+        cursor.execute(f''' INSERT INTO starting_eleven (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ''', (starters["id"],starters["name"], starters["position"], starters["pace"], starters["shooting"], starters["passing"], starters["dribbling"], starters["defending"], starters["physical"], starters["ovr"], starters["value"], starters["fitness"]))
     conn.commit()
+    conn.close()
     return player_list
-
 

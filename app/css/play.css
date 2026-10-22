@@ -143,6 +143,21 @@
     white-space:normal;
 }
 
+.fitness-bar{
+    width:100%;
+    height:.35rem;
+    overflow:hidden;
+    border-radius:999px;
+    background:rgba(0, 255, 21, 0.85);
+}
+
+.fitness-fill{
+    width:0;
+    height:100%;
+    border-radius:inherit;
+    background:#8b5cf6;
+}
+
 .player-ovr{
     padding:.18rem .35rem;
     border:1px solid rgba(233, 221, 255, .48);

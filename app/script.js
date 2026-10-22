@@ -33,6 +33,20 @@ const commitBuyBtn = find('#commitBuyBtn');
 const filterPosition = find('#filterPosition');
 const textualFilter = find("#textual-filter");
 const soldScreen = find("#soldScreen")
+const fitnessBars = {
+    LW: find("#fitness-LW"),
+    ST: find("#fitness-ST"),
+    RW: find("#fitness-RW"),
+    LM: find("#fitness-LM"),
+    LB: find("#fitness-LB"),
+    CAM: find("#fitness-CAM"),
+    CM: find("#fitness-CM"),
+    CB: find("#fitness-CB"),
+    RM: find("#fitness-RM"),
+    RB: find("#fitness-RB"),
+    GK: find("#fitness-GK")
+};
+
 function setText(selector, text){
     for(const element of findAll(selector)){
         element.textContent = text;
@@ -58,19 +72,22 @@ enterButton.onclick = async function(){
     document.body.className = "background-do";
 
     show(generateScreen);
-    await window.pywebview.api.reload_classes();
+    
     const team = await window.pywebview.api.define_cards();
+    await window.pywebview.api.reload_classes();
     for(const player of team){
         const playerName = find(`#${player.position}`);
         const playerCard = playerName.parentElement;
         const positionLabel = playerCard.querySelector(".position-label");
         const playerOVR = playerCard.querySelector(".player-ovr");
+        fitnessBars[player.position].style.width = `${player.fitness}%`
         let playerImg = document.createElement("img");
 
         playerName.textContent = player.name;
         positionLabel.textContent = player.position;
         playerCard.style.backgroundImage = `url(${player.link})`;
         playerOVR.textContent = `${player.ovr}`;
+        fitnessBars[player.position].style.width = `${player.fitness}%`;
         
     }
     document.body.style.display = "block"; 

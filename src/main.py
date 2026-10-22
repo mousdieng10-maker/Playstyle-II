@@ -19,24 +19,22 @@ class Api():
         
         data = checkfile.read(root/"config"/"saved.json")
         if data.get("saved") == True:
-            conn = sqlite3.connect(root/"config"/"players.db")
-            cursor = conn.cursor()
-            cursor.execute("SELECT * FROM starting_eleven")
-            starting_eleven = cursor.fetchall()
+            self.reload_classes()
             all_players = []
-            for player in starting_eleven:
+            for player in global_team.team_objects:
                 player_dict = {
-                    "id": player[0],
-                    "name": player[1],
-                    "position": player[2],
-                    "pace": player[3],
-                    "shooting": player[4],
-                    "passing": player[5],
-                    "dribbling": player[6],
-                    "defending": player[7],
-                    "physical": player[8],
-                    "ovr": player[9],
-                    "value": player[10]
+                    "id": player.id,
+                    "name": player.name,
+                    "position": player.position,
+                    "pace": player.pace,
+                    "shooting": player.shooting,
+                    "passing": player.passing,
+                    "dribbling": player.dribbling,
+                    "defending": player.defending,
+                    "physical": player.physical,
+                    "ovr": player.ovr,
+                    "value": player.value,
+                    "fitness":player.fitness    
                 }
                 all_players.append(player_dict)
             return all_players
@@ -109,9 +107,10 @@ class Api():
         import game
         global global_team
         global_team  = game.init_player_obj()
-    def retrain_players
-
 api = Api()
-
+def on_closing():
+    import game
+    game.save_players(global_team)
 window = webview.create_window("Offside I",str(absolute_root/"app"/"index.html"), js_api=api)
+window.events.closing += on_closing()
 webview.start(debug=True)

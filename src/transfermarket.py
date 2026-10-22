@@ -21,7 +21,8 @@ def reformat_tuple_list(list_tuple_players:list) -> dict:
             "defending":player_tuple[7],
             "physical":player_tuple[8],
             "ovr":player_tuple[9],
-            "value":player_tuple[10]
+            "value":player_tuple[10],
+            "fitness":player_tuple[11]
 
         }
         player_list.append(player_dict)
@@ -52,6 +53,7 @@ def show_transfer_market():
             print(f"{player.get("name")} removed from base.")
     for player in already:
         databse.remove(player)
+    conn.close()
     return databse
 
 def search(element):
@@ -68,6 +70,7 @@ def search(element):
                 pass
             else:
                 search_dict.append(players)
+    conn.close()
     return search_dict
 
 
@@ -79,7 +82,9 @@ def find_in_eleven(player_to_buy):
     for players in all_players:
         if players.get('position') == player_to_buy.get('position'):
             print(players)
-            return players 
+            conn.close()
+            return players
+    conn.close()
 
 def rotate(player, reciprocate):
     conn = sqlite3.connect(root/"config"/"players.db")
@@ -89,8 +94,8 @@ def rotate(player, reciprocate):
         (reciprocate["id"],)
     )
     cursor.execute('''INSERT INTO starting_eleven 
-                    (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                    (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)''',
                     (
                         player["id"],
                         player["name"],
@@ -102,7 +107,8 @@ def rotate(player, reciprocate):
                         player["defending"],
                         player["physical"],
                         player["ovr"],
-                        player["value"]
+                        player["value"],
+                        player["fitness"]
                     ))
     conn.commit()
     conn.close()
@@ -126,8 +132,10 @@ def return_pos(position):
                     print(f"{player.get("name")} removed from specialized base.")
             for player in already:
                 related_players.remove(player)
+            conn.close()
             return related_players
         else:
             cursor.execute('''SELECT * FROM players''')
             full_list = reformat_tuple_list(cursor.fetchall())
+            conn.close()
             return full_list

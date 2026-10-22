@@ -59,7 +59,7 @@ def populate():
     if data.get("saved") == True:
         print("save already created")
         return
-    else:
+    elif data.get("saved") == False:
         player_list = []
         for i in range(200):
             player_list.append(f"{first_names[i]} {last_names[i]}")
@@ -127,7 +127,7 @@ def populate():
                 physical INTEGER NOT NULL,
                 ovr INTEGER NOT NULL,
                 value INTEGER NOT NULL,
-                fitness INTEGER NOT NULL, 
+                fitness INTEGER NOT NULL
             )
 
 
@@ -139,4 +139,4 @@ def populate():
         
         conn.commit()
         re.write(root/"config"/"saved.json", {"saved":True, "budget":1500000})
-
+        conn.close()
