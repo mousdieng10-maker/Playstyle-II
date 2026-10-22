@@ -107,10 +107,14 @@ class Api():
         import game
         global global_team
         global_team  = game.init_player_obj()
+    def load_training(self):
+        pass 
+
+
 api = Api()
 def on_closing():
     import game
     game.save_players(global_team)
 window = webview.create_window("Offside I",str(absolute_root/"app"/"index.html"), js_api=api)
-window.events.closing += on_closing()
+window.events.closing += on_closing
 webview.start(debug=True)

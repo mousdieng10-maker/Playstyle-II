@@ -1,0 +1,82 @@
+.training-screen{
+    flex-direction:column;
+    align-items:stretch;
+    gap:1rem;
+    width:min(100%, 110rem);
+    min-height:100vh;
+    padding:1.5rem clamp(1rem, 3vw, 3rem);
+    overflow-x:auto;
+    background:rgba(16, 0, 37, .96);
+}
+
+.training-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:1rem;
+    padding-bottom:.75rem;
+    border-bottom:2px solid #8b5cf6;
+}
+
+.training-header h1{
+    color:#e9ddff;
+}
+
+.training-row{
+    display:grid;
+    grid-template-columns:2fr .8fr .7fr repeat(6, .65fr) 1.4fr .8fr .8fr;
+    align-items:center;
+    gap:.6rem;
+    min-width:68rem;
+    padding:.8rem 1rem;
+    border:1px solid rgba(139, 92, 246, .28);
+    border-radius:.6rem;
+    background:rgba(48, 23, 66, .55);
+    color:#e9ddff;
+    text-align:center;
+}
+
+.training-columns{
+    position:sticky;
+    top:0;
+    z-index:1;
+    border-color:rgba(139, 92, 246, .55);
+    background:#1e0b35;
+    color:#bda4ea;
+    font-size:.8rem;
+    font-weight:700;
+}
+
+.training-player-name{
+    color:#fff;
+    font-size:1.05rem;
+    text-align:left;
+}
+
+.training-ovr{
+    padding:.3rem;
+    border-radius:.35rem;
+    background:linear-gradient(120deg, #8b5cf6, #5b27b6);
+    color:#fff;
+    font-size:1.1rem;
+    font-weight:800;
+}
+
+.training-row:not(.training-columns) > span:nth-last-child(3){
+    color:#f5c451;
+    font-weight:700;
+}
+
+.training-row:not(.training-columns) > span:nth-last-child(2){
+    color:#bda4ea;
+    font-weight:700;
+}
+
+.opt-train{
+    padding:.45rem .7rem;
+    border:1px solid rgba(139, 92, 246, .7);
+    border-radius:.45rem;
+    background:linear-gradient(120deg, #8b5cf6, #5b27b6);
+    color:#fff;
+    font-weight:700;
+}

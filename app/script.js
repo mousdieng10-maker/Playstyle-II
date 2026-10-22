@@ -15,6 +15,8 @@ const homeScreen = find("#homeScreen");
 const leftSection = find(".left-section");
 const generateScreen = find("#generateScreen");
 const playingScreen = find("#playingScreen");
+const trainingScreen = find("#trainingScreen");
+const trainingBtn = find("#trainingBtn");
 const transferDiv = find("#transferDiv")
 const transferBtn = find("#transferBtn");
 const transfermarket = find("#transfermarket");
@@ -60,6 +62,7 @@ let incr;
 hide(generateScreen);
 hide(playingScreen);
 hide(transfermarket);
+hide(trainingScreen);
 
 
 
@@ -75,7 +78,11 @@ enterButton.onclick = async function(){
     
     const team = await window.pywebview.api.define_cards();
     await window.pywebview.api.reload_classes();
+    console.log("Returned team:", team);
+    console.log("First player:", team?.[0]);
+    console.log("Team is array:", Array.isArray(team));
     for(const player of team){
+        
         const playerName = find(`#${player.position}`);
         const playerCard = playerName.parentElement;
         const positionLabel = playerCard.querySelector(".position-label");
@@ -94,6 +101,83 @@ enterButton.onclick = async function(){
     hide(generateScreen);
     show(playingScreen);
 }
+
+trainingBtn.onclick = async function(){
+    hide(playingScreen);
+    show(generateScreen);
+
+    const team = await window.pywebview.api.define_cards();
+    trainingScreen.innerHTML = "";
+
+    let trainingHeader = document.createElement("div");
+    let trainingTitle = document.createElement("h1");
+    let trainingBackButton = document.createElement("button");
+    trainingHeader.className = "training-header";
+    trainingTitle.textContent = "Player Training";
+    trainingBackButton.className = "play-button";
+    trainingBackButton.textContent = "Back to Team";
+    trainingBackButton.onclick = function(){
+        hide(trainingScreen);
+        show(playingScreen);
+    };
+    trainingHeader.appendChild(trainingTitle);
+    trainingHeader.appendChild(trainingBackButton);
+    trainingScreen.appendChild(trainingHeader);
+
+    let trainingColumns = document.createElement("div");
+    trainingColumns.className = "training-row training-columns";
+    trainingColumns.innerHTML = "<span>Player</span><span>Position</span><span>OVR</span><span>PAC</span><span>SHO</span><span>PAS</span><span>DRI</span><span>DEF</span><span>PHY</span><span>Value</span><span>Fitness</span><span></span>";
+    trainingScreen.appendChild(trainingColumns);
+
+    for(const player of team){
+        let trainingRow = document.createElement("div");
+        let playerName = document.createElement("h2");
+        let playerPosition = document.createElement("span");
+        let playerOVR = document.createElement("h2");
+        let playerPace = document.createElement("span");
+        let playerShooting = document.createElement("span");
+        let playerPassing = document.createElement("span");
+        let playerDribbling = document.createElement("span");
+        let playerDefending = document.createElement("span");
+        let playerPhysical = document.createElement("span");
+        let playerValue = document.createElement("span");
+        let playerFitness = document.createElement("span");
+        let trainBtn = document.createElement("button");
+        trainBtn.className = "opt-train";
+        trainBtn.textContent = "Train";
+        trainingRow.className = "training-row";
+        playerName.className = "training-player-name";
+        playerOVR.className = "training-ovr";
+        playerName.textContent = player.name;
+        playerPosition.textContent = player.position;
+        playerOVR.textContent = player.ovr;
+        playerPace.textContent = player.pace;
+        playerShooting.textContent = player.shooting;
+        playerPassing.textContent = player.passing;
+        playerDribbling.textContent = player.dribbling;
+        playerDefending.textContent = player.defending;
+        playerPhysical.textContent = player.physical;
+        playerValue.textContent = `$${player.value}`;
+        playerFitness.textContent = `${player.fitness}%`;
+
+        trainingRow.appendChild(playerName);
+        trainingRow.appendChild(playerPosition);
+        trainingRow.appendChild(playerOVR);
+        trainingRow.appendChild(playerPace);
+        trainingRow.appendChild(playerShooting);
+        trainingRow.appendChild(playerPassing);
+        trainingRow.appendChild(playerDribbling);
+        trainingRow.appendChild(playerDefending);
+        trainingRow.appendChild(playerPhysical);
+        trainingRow.appendChild(playerValue);
+        trainingRow.appendChild(playerFitness);
+        trainingRow.appendChild(trainBtn);
+        trainingScreen.appendChild(trainingRow);
+    }
+
+    hide(generateScreen);
+    show(trainingScreen);
+};
 
 
 
