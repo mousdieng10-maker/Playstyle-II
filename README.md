@@ -26,8 +26,9 @@ You can:
 
 <h1>Images of the game in its very early stage, the ui is almost certainly going to change</h1>
 <img width="1919" height="1005" alt="image" src="https://github.com/user-attachments/assets/a6a30d37-1cec-41a7-afb1-79a16a957ef9" />
-<img width="1919" height="1010" alt="image" src="https://github.com/user-attachments/assets/7838de38-15b5-4c9b-a7f6-5aaee7947e05" />
+<img width="1919" height="1007" alt="image" src="https://github.com/user-attachments/assets/b7d1a548-a1d3-4891-891c-aedec3ae3a98" />
 <img width="1919" height="1010" alt="image" src="https://github.com/user-attachments/assets/1d794bd9-b6e8-4544-b48c-039fa759691d" />
-<img width="1919" height="1013" alt="image" src="https://github.com/user-attachments/assets/9e5fa462-09ff-40fc-9fc1-20d579328e5f" />
+<img width="1919" height="1032" alt="Screenshot 2026-10-23 002627" src="https://github.com/user-attachments/assets/fa8aadb5-d1fe-403c-b1cc-aac2ba7ade14" />
+
 
 warning: this is a beginner project so expect some bugs.
