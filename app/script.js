@@ -68,6 +68,7 @@ hide(trainingScreen);
 
 trainingBackBtn.onclick = function(){
     hide(trainingScreen);
+    refresh()
     show(playingScreen);
 };
 
@@ -77,6 +78,10 @@ trainingBackBtn.onclick = function(){
 
 // Ask Python for the starting lineup, then populate the pitch and show the game.
 enterButton.onclick = async function(){
+    refresh()
+}
+
+async function refresh(){
     hide(homeScreen);
     document.body.className = "background-do";
 
@@ -84,9 +89,6 @@ enterButton.onclick = async function(){
     
     const team = await window.pywebview.api.define_cards();
     await window.pywebview.api.reload_classes();
-    console.log("Returned team:", team);
-    console.log("First player:", team?.[0]);
-    console.log("Team is array:", Array.isArray(team));
     for(const player of team){
         
         const playerName = find(`#${player.position}`);
@@ -132,6 +134,8 @@ trainingBtn.onclick = async function(){
             let trainBtn = document.createElement("button");
             trainBtn.className = "opt-train";
             trainBtn.textContent = "Train";
+            playerValue.className = "training-value";
+            playerFitness.className = "training-fitness";
             trainingRow.className = "training-row";
             playerName.className = "training-player-name";
             playerOVR.className = "training-ovr";

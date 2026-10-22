@@ -68,12 +68,12 @@
     font-weight:800;
 }
 
-.training-row:not(.training-columns) > span:nth-last-child(3){
+.training-value{
     color:#f5c451;
     font-weight:700;
 }
 
-.training-row:not(.training-columns) > span:nth-last-child(2){
+.training-fitness{
     color:#bda4ea;
     font-weight:700;
 }

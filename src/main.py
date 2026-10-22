@@ -111,8 +111,10 @@ class Api():
         import game
         for player in global_team.team_objects:
             if player.id == player_id:
-                return player.train()
+                data = player.train()
+                player.calculate_ovr()
         game.save_players(global_team)
+        return data
 
 
 
