@@ -19,6 +19,8 @@ const trainingScreen = find("#trainingScreen");
 const trainingBtn = find("#trainingBtn");
 const trainingBackBtn = find("#trainingBackBtn");
 const trainingList = find("#trainingList");
+const trainingMessage = find("#trainingMessage");
+const trainingMessageText = find("#trainingMessageText");
 const transferDiv = find("#transferDiv")
 const transferBtn = find("#transferBtn");
 const transfermarket = find("#transfermarket");
@@ -170,12 +172,17 @@ trainingBtn.onclick = async function(){
                 let loader = document.createElement("div");
                 loader.className = "spinner";
                 trainingList.appendChild(loader);
-                await window.pywebview.api.load_training(player.id);
+                let training_msg = await window.pywebview.api.load_training(player.id);
                 let newTeam = await window.pywebview.api.define_cards();
                 trainingList.innerHTML = "";
                 for(const i of newTeam){
                     await renderTrain(i);
                 }
+                trainingMessageText.textContent = training_msg;
+                trainingMessage.className = "sold-true";
+                setTimeout(() => {
+                    trainingMessage.className = "sold-screen";
+                }, 2000);
             }
 
     }
@@ -195,8 +202,6 @@ trainingBtn.onclick = async function(){
 
 // Return from the transfer market to the current lineup.
 backButton.onclick = async function(){
-    // I need to make sure to come back here and add an initializing bridge between the js and python 
-    // otherwise the starting eleven will not be updated.
     hide(transfermarket);
     show(playingScreen)
 }

@@ -87,32 +87,49 @@ def populate():
                 position = random.choice(dict_keys)
                 position_dict[position] += 1
             print(position_dict)
-            pace , shooting, passing, dribbling, defending, physical = random.randint(50, 99), random.randint(50, 99), random.randint(50, 99), random.randint(50, 99), random.randint(50, 99), random.randint(50, 99)
-            ovr = (pace + shooting + passing + dribbling + defending + physical) // 6
-            if 50 <= ovr <= 59:
-                fr_value = random.randint(10000000,12000000)
-            elif 60 <= ovr <= 69:
-                fr_value = random.randint(15000000,20000000)
-            elif 70 <= ovr <= 79:
-                fr_value = random.randint(55000000,60000000)
-            elif 80 <= ovr <= 89:
-                fr_value = random.randint(80000000,90000000)
-            elif 90 <= ovr <= 99:
-                fr_value = random.randint(150000000,200000000)
-
             player_dict = {
-                "name": player,
-                "position": position,
-                "pace": pace,
-                "shooting": shooting,
-                "passing": passing,
-                "dribbling": dribbling,
-                "defending": defending,
-                "physical": physical,
-                "ovr": ovr,
-                "value":fr_value,
-                "fitness": 100
-            }
+                            "name": player,
+                            "position": position,
+                            "pace": 0,
+                            "shooting": 0,
+                            "passing": 0,
+                            "dribbling": 0,
+                            "defending": 0,
+                            "physical": 0,
+                            "ovr": 0,
+                            "value":0,
+                            "fitness": 100
+                        }
+            weights = {
+                                "LW":[3,3,2,4,.5,1],
+                                "RW":[3,3,2,4,.5,1],
+                                "ST":[3,4,2,1.5,.3,2],
+                                "CAM":[1.5,3.5,3,2.3,.8,1],
+                                "CM":[1.5,1.5,3,2.5,2,2],
+                                "LM":[2,2,3,1.5,2,2],
+                                "RM":[2,2,3,1.5,2,2],
+                                "CB":[2,.3,.1,.5,4,3],
+                                "LB":[3,.5,1,1.5,3,2],
+                                "RB":[3,.5,1,1.5,3,2],
+                                "GK":[1,1,2,1,1,2]
+                            }
+            ind_weight = weights[position]
+            stats = ["pace", "shooting", "passing", "dribbling", "defending", "physical"]
+            for weight, stat in zip(ind_weight, stats):
+                mean = round(55 + 7.5*weight)
+                value = round(random.gauss(mean, 13))
+                if value < 50:
+                    value = 50
+                elif value > 99:
+                    value = 99
+                player_dict[stat] = value
+            stats_values = [player_dict.get("pace"), player_dict.get("shooting"), player_dict.get("passing"), player_dict.get("dribbling"), player_dict.get("defending"), player_dict.get("physical")]
+            full_amount = sum(stats_values)
+            player_dict["ovr"] = round(full_amount/6)
+            fovr = player_dict["ovr"]
+            player_dict["value"] = round(1000000*fovr + 10**(fovr-(fovr-2)+(fovr/15)))
+
+            
             new_player_list.append(player_dict)
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS players (

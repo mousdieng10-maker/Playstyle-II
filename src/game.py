@@ -44,8 +44,10 @@ class Player:
                 setattr(self, upg, getattr(self, upg)+2)
                 if getattr(self, upg) > 99:
                     setattr(self, upg, 99)
+                    self.fitness -= 10
                     return f"+2 {upg}."
-                self.fitness -= 10
+                
+                return f"+2 {upg}."
             elif upgrade == False:
                 self.fitness -= 15
                 return f"{self.name}'s training sesh bore no fruits!"
@@ -74,7 +76,7 @@ class Player:
             ovr_done += stat * weight[incr]
             incr += 1
         self.ovr = round(ovr_done/sum(weight))
-        
+
 
         
 
