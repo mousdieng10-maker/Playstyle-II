@@ -107,8 +107,13 @@ class Api():
         import game
         global global_team
         global_team  = game.init_player_obj()
-    def load_training(self):
-        pass 
+    def load_training(self,player_id):
+        import game
+        for player in global_team.team_objects:
+            if player.id == player_id:
+                return player.train()
+        game.save_players(global_team)
+
 
 
 api = Api()

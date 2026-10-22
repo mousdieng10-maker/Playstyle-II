@@ -22,6 +22,12 @@
     color:#e9ddff;
 }
 
+#trainingList{
+    display:flex;
+    flex-direction:column;
+    gap:.6rem;
+}
+
 .training-row{
     display:grid;
     grid-template-columns:2fr .8fr .7fr repeat(6, .65fr) 1.4fr .8fr .8fr;
