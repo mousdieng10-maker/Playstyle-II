@@ -9,6 +9,7 @@ root = Path(__file__).resolve().parent
 
 
 def select_team_first_time():
+    from transfermarket import reformat_tuple_list
     playergen.populate()
     conn = sqlite3.connect(root/"config"/"players.db")
     cursor = conn.cursor()
@@ -38,8 +39,9 @@ def select_team_first_time():
         if player_to_add["position"] in database:
             database.remove(player_to_add["position"])
             player_list.append(player_to_add)
+            return player_to_add
         else:
-            check_is_there(playing, database)
+            return check_is_there(playing, database)
 
     for i in range(11):
         check_is_there(reformatted_list, position_list)
@@ -67,6 +69,47 @@ def select_team_first_time():
         
         cursor.execute(f''' INSERT INTO starting_eleven (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ''', (starters["id"],starters["name"], starters["position"], starters["pace"], starters["shooting"], starters["passing"], starters["dribbling"], starters["defending"], starters["physical"], starters["ovr"], starters["value"], starters["fitness"]))
     conn.commit()
+    player_list = []
+    remainder_player = reformat_tuple_list(full_player_database)
+    team_names = [
+        "FC Javascript",
+        "PHP United",
+        "Python Nation",
+        "C++ Saint Germain",
+        "Rust Rovers",
+        "Java City",
+        "Ruby Athletic",
+        "The Go Wanderers",
+        "TypeScript Town",
+        "Kotlin County",
+        "Swift Albion",
+        "Dartford FC",
+        "Lua Lakes",
+        "Perl City",
+        "Fortran Forest",
+        "Haskell Hotspur",
+        "Scala Sporting",
+        "Objective-C United",
+    ]
+    team_list = []
+    remainder_player = [remaining for remaining in remainder_player if remaining not in player_list]
+    for i in range(18):
+        pos_list = ["GK", "CB", "LB", "RB", "CM", "CAM", "LM", "RM", "LW", "RW", "ST"]
+        name_of_team = random.choice(team_names)
+        team_names.remove(name_of_team)
+        players = [check_is_there(remainder_player,pos_list) for j in range(11)]
+        remainder_player = [p for p in remainder_player if p not in players]
+        teams_populate = [
+            {
+            "name":name_of_team,
+            "players":players
+            }
+            
+                
+        ]
+        team_list.append(teams_populate)
+    for team in team_list:
+        pass 
     conn.close()
     return player_list
 

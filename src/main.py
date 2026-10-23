@@ -94,7 +94,7 @@ class Api():
         budget = data.get("budget")
         return budget
     def sell_player(self, player, reciprocate):
-        import transfermarket
+        import transfermarket   
         transfermarket.rotate(player, reciprocate)
     def find_position(self, position):
         import transfermarket
@@ -115,7 +115,8 @@ class Api():
                 player.calculate_ovr()
         game.save_players(global_team)
         return data
-
+    def return_avg_ovr(self):
+        return round(global_team.return_squad_ovr())
 
 
 api = Api()

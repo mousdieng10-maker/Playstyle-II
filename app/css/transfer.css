@@ -139,13 +139,46 @@
 }
 
 .info-sect{
-    padding:1em;
-    box-shadow:1px 1px 8px rgba(49, 20, 58, .12);
-    border:1px solid rgba(120, 57, 140, .2);
-    border-radius:.8em;
-    font-weight:800;
-    background:linear-gradient(75deg, rgb(248, 241, 255), rgb(222, 192, 255));
+    display:flex;
+    flex-direction:column;
+    gap:.2rem;
+    padding:1rem 1.1rem;
+    border:1px solid rgba(120, 57, 140, .22);
+    border-left:4px solid #8b5cf6;
+    border-radius:.9rem;
+    background:linear-gradient(145deg, #fff, #f3eaff);
+    box-shadow:0 .55rem 1.4rem rgba(18, 0, 37, .2);
     color:#572467;
+}
+
+.info-summary{
+    display:flex;
+    flex-direction:column;
+    gap:.8rem;
+    width:15rem;
+    max-width:100%;
+}
+
+.info-label{
+    color:#786584;
+    font-size:.75rem;
+    font-weight:700;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+}
+
+.info-value{
+    color:#351047;
+    font-size:1.8rem;
+    font-weight:800;
+    line-height:1.1;
+    font-variant-numeric:tabular-nums;
+}
+
+.info-suffix{
+    color:#786584;
+    font-size:.8rem;
+    font-weight:600;
 }
 .profile{
     width:10em; 
@@ -405,6 +438,16 @@
 }
 
 @media (max-width: 900px){
+    #transfermarket{
+        flex-direction:column;
+    }
+
+    .info-summary{
+        display:grid;
+        grid-template-columns:repeat(3, minmax(0, 1fr));
+        width:90%;
+    }
+
     .transfer-div{
         width:100%;
     }
@@ -420,6 +463,10 @@
 }
 
 @media (max-width: 520px){
+    .info-summary{
+        grid-template-columns:1fr;
+    }
+
     .market-sell{
         flex-direction:column;
         overflow-y:auto;

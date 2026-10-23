@@ -24,9 +24,8 @@ const trainingMessageText = find("#trainingMessageText");
 const transferDiv = find("#transferDiv")
 const transferBtn = find("#transferBtn");
 const transfermarket = find("#transfermarket");
-const money = find("#money");
-const team = find("#team");
-const avgOvr = find("#avgOvr");
+const moneyValue = find("#moneyValue");
+const avgOvrValue = find("#avgOvrValue");
 const searchPlayer = find(".search-bar"); 
 const backButton = find("#backButton");
 const options = find("#options");
@@ -382,7 +381,9 @@ transferBtn.onclick = async function(){
         renderPlayer(player)
     }
     let amount = await window.pywebview.api.return_budget();
-    money.textContent = `Current Budget: $${amount}`
+    let overallAvg = await window.pywebview.api.return_avg_ovr();
+    moneyValue.textContent = `$${Number(amount).toLocaleString()}`;
+    avgOvrValue.textContent = overallAvg;
     hide(generateScreen);
 
     show(transfermarket);

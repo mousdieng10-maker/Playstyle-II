@@ -191,10 +191,21 @@
             <button id="bBtn" class="option-btn"><i  class="fa-solid fa-arrow-left"></i> BACK</button>
         </div>
         <i id="backButton" class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-        <div style="display:flex; flex-direction:column; gap:2em;">
-            <span class="info-sect"id="money">$30002000</span>
-            <span class="info-sect" id="team">11 Players</span>
-            <span class="info-sect" id="avgOvr">69 OVR</span>
+        <div class="info-summary">
+            <span class="info-sect" id="money">
+                <span class="info-label">Current Budget</span>
+                <strong class="info-value" id="moneyValue">$—</strong>
+            </span>
+            <span class="info-sect" id="team">
+                <span class="info-label">Squad Size</span>
+                <strong class="info-value">11</strong>
+                <span class="info-suffix">Players</span>
+            </span>
+            <span class="info-sect" id="avgOvr">
+                <span class="info-label">Squad Overall</span>
+                <strong class="info-value" id="avgOvrValue">—</strong>
+                <span class="info-suffix">Average rating</span>
+            </span>
         </div>
         
         <div class="transfermarket">

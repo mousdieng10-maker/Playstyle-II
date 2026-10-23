@@ -40,14 +40,16 @@ class Player:
         upg = random.choices(stats_to_upg, weights=weight_to_apply, k=1)[0]
         if self.fitness > 10:
             upgrade = random.choices([True, False], weights=[3,1], k=1)[0]
-            if upgrade:
+            if upgrade == True:
                 setattr(self, upg, getattr(self, upg)+2)
                 if getattr(self, upg) > 99:
                     setattr(self, upg, 99)
                     self.fitness -= 10
+                    return f"{upg} is already maxed out!"
+                else:
+                    self.fitness -= 10
                     return f"+2 {upg}."
                 
-                return f"+2 {upg}."
             elif upgrade == False:
                 self.fitness -= 15
                 return f"{self.name}'s training sesh bore no fruits!"
@@ -55,27 +57,9 @@ class Player:
         else:
             return f"{self.name} is too tired!"
     def calculate_ovr(self):
-        weights = {
-                    "LW":[3,3,2,4,.5,1],
-                    "RW":[3,3,2,4,.5,1],
-                    "ST":[3,4,2,1.5,.3,2],
-                    "CAM":[1.5,3.5,3,2.3,.8,1],
-                    "CM":[1.5,1.5,3,2.5,2,2],
-                    "LM":[2,2,3,1.5,2,2],
-                    "RM":[2,2,3,1.5,2,2],
-                    "CB":[2,.3,.1,.5,4,3],
-                    "LB":[3,.5,1,1.5,3,2],
-                    "RB":[3,.5,1,1.5,3,2],
-                    "GK":[1,1,2,1,1,2]
-                }
         stats_to_upg = [self.pace,self.shooting,self.passing,self.dribbling,self.defending,self.physical]
-        weight = weights.get(self.position)
-        ovr_done = 0
-        incr = 0
-        for stat in stats_to_upg:
-            ovr_done += stat * weight[incr]
-            incr += 1
-        self.ovr = round(ovr_done/sum(weight))
+
+        self.ovr = round(sum(stats_to_upg)/6)
 
 
         
@@ -83,6 +67,11 @@ class Player:
 class Team:
     def __init__(self, team_objects):
         self.team_objects = team_objects
+    def return_squad_ovr(self):
+        ful_list = [player.ovr for player in self.team_objects]
+        overall_ovr = sum(ful_list)/len(ful_list)
+        return overall_ovr  
+          
 
 
 
@@ -126,3 +115,8 @@ def save_players(classes):
                                 ))
     conn.commit()
     conn.close()
+
+def game_engine(squadinat):
+    starting_eleven = squadinat
+
+        

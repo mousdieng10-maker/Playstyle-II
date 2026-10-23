@@ -25,7 +25,28 @@ first_names = [
 	"Vitor", "Wesley", "Wilfried", "William", "Xavi", "Yannick", "Youssef", "Zlatan", "Zeki", "Zinedine",
 	"Abdoulaye", "Adama", "Alessandro", "Alexis", "Alvaro", "Andriy", "Ansu", "Armando", "Benjamin", "Boubacar",
 	"Bryan", "Darwin", "Denzel", "Donyell", "Dylan", "Emmanuel", "Fikayo", "Gareth", "Iker", "Ismael",
-	"Jeremie", "Joey", "Jonas", "Josip", "Kenneth", "Leandro", "Malik", "Mikel", "Moussa", "Ryan"
+	"Jeremie", "Joey", "Jonas", "Josip", "Kenneth", "Leandro", "Malik", "Mikel", "Moussa", "Ryan",
+	"Abraham", "Achraf", "Adrian", "Afonso", "Agustin", "Aitor", "Alberto", "Aleix", "Alessio", "Amine",
+	"Anatoliy", "Andreas", "Andrej", "Antoine", "Arijanet", "Arnaut", "Ashley", "Aurelien", "Baptiste", "Bastian",
+	"Benjamin", "Benoit", "Bilal", "Bobby", "Bradley", "Breel", "Caglar", "Casper", "Cesc", "Cheick",
+	"Chidera", "Claudio", "Conor", "Cyril", "Daniil", "Dario", "Dele", "Dominik", "Duncan", "Edin",
+	"Eljif", "Ellyes", "Enes", "Enock", "Eray", "Ethan", "Evan", "Fabio", "Faustino", "Federico",
+	"Felix", "Fermin", "Fernando", "Filip", "Franck", "Franco", "Gabriel", "Garang", "Gianluigi", "Giorgio",
+	"Giovani", "Goncalo", "Grady", "Guillermo", "Hakan", "Hamari", "Hannibal", "Harvey", "Heung-Min", "Hugo",
+	"Ilaix", "Iliman", "Ismael", "Jamal", "Jarrad", "Javi", "Jhon", "Jo", "Jordan", "Jorginho",
+	"Joselu", "Juan", "Julio", "Jurrien", "Kacper", "Kamil", "Karlo", "Kasey", "Kelechi", "Kenny",
+	"Khvicha", "Koke", "Konrad", "Lamine", "Lazar", "Leonardo", "Lewis", "Luka", "Maarten", "Malo",
+	"Marcelo", "Marcos", "Marquinhos", "Martial", "Mateo", "Mathys", "Max", "Maxence", "Mehdi", "Mikayil",
+	"Mohammed", "Morgan", "Nicolas", "Nicolai", "Nico", "Odilon", "Oliver", "Orkun", "Pau", "Pedro",
+	"Quentin", "Rayan", "Renato", "Rico", "Roberto", "Romain", "Samu", "Sebastian", "Sehrou", "Shinji",
+	"Stefan", "Sven", "Tanguy", "Tarek", "Teun", "Thilo", "Tim", "Tom", "Wahbi", "Wilfred",
+	"Xherdan", "Yacine", "Yangel", "Yann", "Yehor", "Yunus", "Zeki", "Zekiye", "Zeno", "Zian",
+	"Abner", "Adil", "Ainsley", "Alfie", "Amadou", "Anderson", "Anwar", "Armando", "Bafode", "Bartosz",
+	"Calvin", "Cameron", "Clement", "Dawid", "Eberechi", "Emerson", "Facundo", "Florentino", "Gerson", "Giuliano",
+	"Halil", "Ibrahim", "Jean", "Jesper", "Kurt", "Lukas", "Mats", "Nacer", "Orel", "Piero",
+	"Rafinha", "Salvatore", "Timo", "Valentin", "Wataru", "Yuki", "Zeki", "Abdou", "Boubacar", "Cheick",
+	"Diego", "Elias", "Francisco", "Gustavo", "Ibrahim", "Joaquin", "Khalil", "Lorenzo", "Mohamed", "Nicolas",
+	"Osman", "Patson", "Rafael", "Santiago", "Thierry", "Umar", "Victor", "Xavier", "Yuri", "Zayd"
 ]
 
 last_names = [
@@ -48,7 +69,31 @@ last_names = [
 	"Kamada", "Keane", "Kounde", "Kvaratskhelia", "Lavia", "Locatelli", "Maddison", "Maguire", "Mahrez", "Maignan",
 	"Malen", "Milik", "Mitoma", "Morata", "Muriel", "Nketiah", "Partey", "Pavard", "Pellegrini", "Rabiot",
 	"Reguilon", "Reus", "Riquelme", "Rogers", "Romero", "Sabitzer", "Savic", "Schick", "Shaw", "Skhiri",
-	"Solanke", "Szoboszlai", "Tagliafico", "Tomori", "Tonali", "Trossard", "Upamecano", "Vlahovic", "Ward-Prowse", "Zubimendi"
+	"Solanke", "Szoboszlai", "Tagliafico", "Tomori", "Tonali", "Trossard", "Upamecano", "Vlahovic", "Ward-Prowse", "Zubimendi",
+	"Aboubakar", "Acerbi", "Ait-Nouri", "Akanji", "Akpom", "Almiron", "Andrich", "Andre", "Asensio", "Aubameyang",
+	"Bailey", "Bakker", "Baldock", "Bamford", "Barcola", "Bard", "Barnes", "Bassey", "Baturina", "Bellerin",
+	"Berardi", "Bergwijn", "Beto", "Boly", "Borja", "Boufal", "Boulaye", "Boye", "Bremer", "Broja",
+	"Bueno", "Buendia", "Cairney", "Calvert-Lewin", "Capoue", "Castro", "Cavaminga", "Chukwueze", "Coady", "Correa",
+	"Cristante", "Daka", "Daland", "Danjuma", "Darmian", "Dawson", "Delaney", "Dendoncker", "Deulofeu", "Dewsbury-Hall",
+	"Diaby", "Dier", "Doku", "Doucoure", "Doyle", "Duran", "Emerson", "Eze", "Ferguson", "Fofana",
+	"Gallagher", "Garnacho", "Gibbs", "Gilmour", "Giroud", "Godfrey", "Gomes", "Gordon", "Guehi", "Gvardiol",
+	"Gyokeres", "Henderson", "Hickey", "Hincapie", "Hojbjerg", "Holgate", "Hutchinson", "Iwobi", "Jorgensen", "Kalajdzic",
+	"Kamada", "Kamada", "Kessie", "Kluivert", "Kone", "Kudus", "Lallana", "Lemar", "Lerma", "Lindelof",
+	"Livramento", "Lo Celso", "Lukaku", "Lukebakio", "Mane", "Marmoush", "Mateta", "Mavididi", "McGinn", "Meite",
+	"Merino", "Mings", "Moffi", "Monreal", "Morris", "Mudryk", "Murillo", "Ndombele", "Nmecha", "Norgaard",
+	"Olise", "Onyeka", "Openda", "Paqueta", "Pavard", "Pedro", "Pereira", "Petrovic", "Pino", "Pinnock",
+	"Ramsey", "Rashica", "Raya", "Ream", "Rensch", "Retegui", "Richards", "Rincon", "Roca", "Rodon",
+	"Rutter", "Sangare", "Sarr", "Savio", "Scamacca", "Schade", "Schlotterbeck", "Sensi", "Shaqiri", "Simakan",
+	"Sinisterra", "Smalling", "Soucek", "Stanisic", "Stankovic", "Summerville", "Sutalo", "Taremi", "Theate", "Tielemans",
+	"Udogie", "Undav", "Vazquez", "Veiga", "Veretout", "Walker-Peters", "Weghorst", "Werner", "White", "Willock",
+	"Wilson", "Yates", "Zaniolo", "Zaroury", "Zinchenko", "Aarons", "Abraham", "Ait-Nouri", "Almada", "Amadou",
+	"Arnautovic", "Aursnes", "Badiashile", "Bailly", "Bakayoko", "Balde", "Bamba", "Benzia", "Berge", "Bernat",
+	"Beundia", "Bissaka", "Bonaventura", "Borges", "Borre", "Boufal", "Brahimi", "Cacace", "Cambiasso", "Carmo",
+	"Carrasco", "Casteels", "Cervi", "Chalobah", "Cherki", "Chukwueze", "Cisse", "Colak", "Corluka", "Cunha",
+	"Danilo", "Dendoncker", "Djalo", "Dumfries", "Elmas", "Embolo", "Estupinan", "Fares", "Fellaini", "Fresneda",
+	"Gerson", "Gouiri", "Gravenberch", "Guendouzi", "Haller", "Hwang", "Isco", "Joao Mario", "Kabak", "Kamada",
+	"Karsdorp", "Kimpembe", "Kostic", "Lazovic", "Malen", "Mandragora", "Maripan", "Milenkovic", "Milenkovic-Savic", "Mina",
+	"Ndicka", "Nianzou", "Paredes", "Pellegrini", "Pirola", "Politano", "Rrahmani", "Sanches", "Singo", "Skov Olsen"
 ]
 
 
@@ -61,7 +106,7 @@ def populate():
         return
     elif data.get("saved") == False:
         player_list = []
-        for i in range(200):
+        for i in range(400):
             player_list.append(f"{first_names[i]} {last_names[i]}")
         print(player_list)
         conn = sqlite3.connect(root/"config"/"players.db")
@@ -80,16 +125,23 @@ def populate():
             "ST":0
         }
         new_player_list = []
-        for player in player_list:
-            dict_keys = list(position_dict.keys())
-            position = random.choice(dict_keys)
-            while position_dict[position] >= 25:
+        dict_keys = list(position_dict.keys())
+        def check_pos():
+            availalable_positions = [pos for pos in dict_keys if position_dict[pos] < 36]
+            try:
+                position = random.choice(availalable_positions)
+            except IndexError:
                 position = random.choice(dict_keys)
-                position_dict[position] += 1
+            position_dict[position] += 1
+            return position
+        for player in player_list:
+            player_position = check_pos()
+            
+            
             print(position_dict)
             player_dict = {
                             "name": player,
-                            "position": position,
+                            "position": player_position,
                             "pace": 0,
                             "shooting": 0,
                             "passing": 0,
@@ -113,10 +165,10 @@ def populate():
                                 "RB":[3,.5,1,1.5,3,2],
                                 "GK":[1,1,2,1,1,2]
                             }
-            ind_weight = weights[position]
+            ind_weight = weights[player_position]
             stats = ["pace", "shooting", "passing", "dribbling", "defending", "physical"]
             for weight, stat in zip(ind_weight, stats):
-                mean = round(55 + 7.5*weight)
+                mean = round(63 + 7.5*weight)
                 value = round(random.gauss(mean, 13))
                 if value < 50:
                     value = 50
