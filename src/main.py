@@ -34,7 +34,8 @@ class Api():
                     "physical": player.physical,
                     "ovr": player.ovr,
                     "value": player.value,
-                    "fitness":player.fitness    
+                    "fitness":player.fitness,
+                    "club":player.club    
                 }
                 all_players.append(player_dict)
             return all_players

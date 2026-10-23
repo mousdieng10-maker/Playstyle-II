@@ -8,7 +8,7 @@ from pathlib import Path
 root = Path(__file__).resolve().parent
 
 class Player:
-    def __init__(self, id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness):
+    def __init__(self, id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness, club):
         self.id = id
         self.name = name
         self.position = position
@@ -21,6 +21,7 @@ class Player:
         self.ovr = ovr
         self.value = value
         self.fitness = fitness
+        self.club = club
     def train(self):
         stats_to_upg = ["pace","shooting","passing","dribbling","defending","physical"]
         weights = {
@@ -83,7 +84,7 @@ def init_player_obj():
     conn.close()
     obj_list = []
     for player in eleven:
-        player_obj = Player(player.get("id"),player.get("name"),player.get("position"),player.get("pace"), player.get("shooting"),player.get("passing"),player.get("dribbling"),player.get("defending"), player.get("physical"), player.get("ovr"), player.get("value"), player.get("fitness"))
+        player_obj = Player(player.get("id"),player.get("name"),player.get("position"),player.get("pace"), player.get("shooting"),player.get("passing"),player.get("dribbling"),player.get("defending"), player.get("physical"), player.get("ovr"), player.get("value"), player.get("fitness"), player.get("club"))
         obj_list.append(player_obj)
     team_obj = Team(obj_list)
     return team_obj
@@ -97,8 +98,8 @@ def save_players(classes):
     if classes != "":
         for player in classes.team_objects:
             cursor.execute('''INSERT INTO starting_eleven 
-                                (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness)
-                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)''',
+                                (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness, club)
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)''',
                                 (
                                     player.id,
                                     player.name,
@@ -111,7 +112,8 @@ def save_players(classes):
                                     player.physical,
                                     player.ovr,
                                     player.value,
-                                    player.fitness
+                                    player.fitness,
+                                    player.club
                                 ))
     conn.commit()
     conn.close()
@@ -119,4 +121,3 @@ def save_players(classes):
 def game_engine(squadinat):
     starting_eleven = squadinat
 
-        

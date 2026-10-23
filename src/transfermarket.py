@@ -22,7 +22,8 @@ def reformat_tuple_list(list_tuple_players:list) -> dict:
             "physical":player_tuple[8],
             "ovr":player_tuple[9],
             "value":player_tuple[10],
-            "fitness":player_tuple[11]
+            "fitness":player_tuple[11],
+            "club":player_tuple[12]
 
         }
         player_list.append(player_dict)
@@ -93,9 +94,23 @@ def rotate(player, reciprocate):
         "DELETE FROM starting_eleven WHERE id=?",
         (reciprocate["id"],)
     )
+    cursor.execute(f'''INSERT INTO "{player["club"]}" (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness,club) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)''',
+                            (reciprocate["id"],
+                            reciprocate["name"],
+                            reciprocate["position"],
+                            reciprocate["pace"],
+                            reciprocate["shooting"],
+                            reciprocate["passing"],
+                            reciprocate["dribbling"],
+                            reciprocate["defending"],
+                            reciprocate["physical"],
+                            reciprocate["ovr"],
+                            reciprocate["value"],
+                            reciprocate["fitness"],
+                            player["club"]))
     cursor.execute('''INSERT INTO starting_eleven 
-                    (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)''',
+                    (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness,club)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)''',
                     (
                         player["id"],
                         player["name"],
@@ -108,8 +123,13 @@ def rotate(player, reciprocate):
                         player["physical"],
                         player["ovr"],
                         player["value"],
-                        player["fitness"]
+                        player["fitness"],
+                        "starting_eleven"
                     ))
+    cursor.execute("DELETE FROM players WHERE id=?", (reciprocate["id"]),)
+    cursor.execute("DELETE FROM players WHERE id=?", (player["id"]),)
+    cursor.execute("INSERT INTO players SELECT * FROM starting_eleven WHERE id=?", (player["id"],))
+    cursor.execute(f'''INSERT INTO players SELECT * FROM "{player["club"]}" WHERE id=?''', (reciprocate["id"],))
     conn.commit()
     conn.close()
     

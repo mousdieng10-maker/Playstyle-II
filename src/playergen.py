@@ -206,7 +206,7 @@ def populate():
 
         for player in new_player_list:
             cursor.execute(f''' INSERT INTO players (name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness) VALUES (?,?,?,?,?,?,?,?,?,?,?) ''', (player["name"], player["position"], player["pace"], player["shooting"], player["passing"], player["dribbling"], player["defending"], player["physical"], player["ovr"], player["value"], player["fitness"]))
-
+        
         
         conn.commit()
         re.write(root/"config"/"saved.json", {"saved":True, "budget":1500000})

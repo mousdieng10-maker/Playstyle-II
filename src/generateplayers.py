@@ -62,15 +62,17 @@ def select_team_first_time():
                     physical INTEGER NOT NULL,
                     ovr INTEGER NOT NULL,
                     value INTEGER NOT NULL,
-                    fitness INTEGER NOT NULL
+                    fitness INTEGER NOT NULL,
+                    club TEXT
                     )
                
                     ''')  
     for starters in player_list:
         
-        cursor.execute(f''' INSERT INTO starting_eleven (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ''', (starters["id"],starters["name"], starters["position"], starters["pace"], starters["shooting"], starters["passing"], starters["dribbling"], starters["defending"], starters["physical"], starters["ovr"], starters["value"], starters["fitness"]))
+        cursor.execute(f''' INSERT INTO starting_eleven (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness, club) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ''', (starters["id"],starters["name"], starters["position"], starters["pace"], starters["shooting"], starters["passing"], starters["dribbling"], starters["defending"], starters["physical"], starters["ovr"], starters["value"], starters["fitness"], "starting_eleven"))
+    new_list = player_list.copy()
+    
     conn.commit()
-    player_list = []
     remainder_player = reformat_tuple_list(full_player_database)
     team_names = [
         "FC Javascript",
@@ -91,11 +93,65 @@ def select_team_first_time():
         "Haskell Hotspur",
         "Scala Sporting",
         "Objective-C United",
+        "Ruby on Rails FC",
+        "Node.js Athletic",
+        "React Rovers",
+        "Angular City",
+        "Vue United",
+        "GitHub Wanderers",
+        "Docker Town",
+        "Linux Albion",
+        "Ubuntu FC",
+        "Fedora County",
+        "Debian Dynamo",
+        "Arch City",
+        "Kubernetes FC",
+        "Mongo City",
+        "SQL Sporting",
+        "Git United",
+        "API Athletic",
     ]
-    immutable = team_names
+    player_list = []
+    immutable = [
+        "FC Javascript",
+        "PHP United",
+        "Python Nation",
+        "C++ Saint Germain",
+        "Rust Rovers",
+        "Java City",
+        "Ruby Athletic",
+        "The Go Wanderers",
+        "TypeScript Town",
+        "Kotlin County",
+        "Swift Albion",
+        "Dartford FC",
+        "Lua Lakes",
+        "Perl City",
+        "Fortran Forest",
+        "Haskell Hotspur",
+        "Scala Sporting",
+        "Objective-C United",
+        "Ruby on Rails FC",
+        "Node.js Athletic",
+        "React Rovers",
+        "Angular City",
+        "Vue United",
+        "GitHub Wanderers",
+        "Docker Town",
+        "Linux Albion",
+        "Ubuntu FC",
+        "Fedora County",
+        "Debian Dynamo",
+        "Arch City",
+        "Kubernetes FC",
+        "Mongo City",
+        "SQL Sporting",
+        "Git United",
+        "API Athletic",
+    ]
     team_list = []
-    remainder_player = [remaining for remaining in remainder_player if remaining not in player_list]
-    for i in range(18):
+    remainder_player = [remaining for remaining in remainder_player if remaining not in new_list]
+    for i in range(35):
         pos_list = ["GK", "CB", "LB", "RB", "CM", "CAM", "LM", "RM", "LW", "RW", "ST"]
         name_of_team = random.choice(team_names)
         team_names.remove(name_of_team)
@@ -138,10 +194,10 @@ def select_team_first_time():
     cursor.execute('''DELETE FROM players''')
     for teams in immutable:
         cursor.execute(f'''INSERT INTO players SELECT * FROM "{teams}"''')
+    cursor.execute(f'''INSERT INTO players SELECT * FROM starting_eleven''')
     conn.commit()
 
 
         
     conn.close()
-    return player_list
-
+    return new_list
