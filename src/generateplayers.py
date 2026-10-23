@@ -51,7 +51,7 @@ def select_team_first_time():
     cursor.execute('''CREATE TABLE IF NOT EXISTS starting_eleven 
                 
                     (
-                    id INTEGER PRIMARY KEY NOT NULL,
+                    id INTEGER NOT NULL,
                     name TEXT NOT NULL,
                     position TEXT NOT NULL,
                     pace INTEGER NOT NULL,
@@ -149,14 +149,17 @@ def select_team_first_time():
         "Git United",
         "API Athletic",
     ]
+    cursor.execute('SELECT * FROM starting_eleven')
+    everything = reformat_tuple_list(cursor.fetchall())
+    everything_list = [player_id.get("id") for player_id in everything]
     team_list = []
-    remainder_player = [remaining for remaining in remainder_player if remaining not in new_list]
+    conclude_list = [every for every in remainder_player if every.get("id") not in everything_list]
     for i in range(35):
         pos_list = ["GK", "CB", "LB", "RB", "CM", "CAM", "LM", "RM", "LW", "RW", "ST"]
         name_of_team = random.choice(team_names)
         team_names.remove(name_of_team)
-        players = [check_is_there(remainder_player,pos_list) for j in range(11)]
-        remainder_player = [p for p in remainder_player if p not in players]
+        players = [check_is_there(conclude_list,pos_list) for j in range(11)]
+        conclude_list = [p for p in conclude_list if p not in players]
         teams_populate = {
             "name":name_of_team,
             "players":players
@@ -170,7 +173,7 @@ def select_team_first_time():
         CREATE TABLE IF NOT EXISTS "{teamname}"
         
             (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id INTEGER NOT NULL,
             name TEXT NOT NULL,
             position TEXT NOT NULL,
             pace INTEGER NOT NULL,

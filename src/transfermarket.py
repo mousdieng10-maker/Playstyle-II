@@ -126,8 +126,8 @@ def rotate(player, reciprocate):
                         player["fitness"],
                         "starting_eleven"
                     ))
-    cursor.execute("DELETE FROM players WHERE id=?", (reciprocate["id"]),)
-    cursor.execute("DELETE FROM players WHERE id=?", (player["id"]),)
+    cursor.execute("DELETE FROM players WHERE id=?", (reciprocate["id"],))
+    cursor.execute("DELETE FROM players WHERE id=?", (player["id"],))
     cursor.execute("INSERT INTO players SELECT * FROM starting_eleven WHERE id=?", (player["id"],))
     cursor.execute(f'''INSERT INTO players SELECT * FROM "{player["club"]}" WHERE id=?''', (reciprocate["id"],))
     conn.commit()

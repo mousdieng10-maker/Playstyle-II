@@ -185,7 +185,7 @@ def populate():
             new_player_list.append(player_dict)
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS players (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id INTEGER PRIMARY KEY,
                 name TEXT NOT NULL,
                 position TEXT NOT NULL,
                 pace INTEGER NOT NULL,
@@ -203,10 +203,10 @@ def populate():
 
 
         ''')
-
+        incr = 1
         for player in new_player_list:
-            cursor.execute(f''' INSERT INTO players (name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness) VALUES (?,?,?,?,?,?,?,?,?,?,?) ''', (player["name"], player["position"], player["pace"], player["shooting"], player["passing"], player["dribbling"], player["defending"], player["physical"], player["ovr"], player["value"], player["fitness"]))
-        
+            cursor.execute(f''' INSERT INTO players (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ''', (incr, player["name"], player["position"], player["pace"], player["shooting"], player["passing"], player["dribbling"], player["defending"], player["physical"], player["ovr"], player["value"], player["fitness"]))
+            incr +=1 
         
         conn.commit()
         re.write(root/"config"/"saved.json", {"saved":True, "budget":1500000})
