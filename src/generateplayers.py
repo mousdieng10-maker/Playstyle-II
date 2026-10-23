@@ -99,17 +99,43 @@ def select_team_first_time():
         team_names.remove(name_of_team)
         players = [check_is_there(remainder_player,pos_list) for j in range(11)]
         remainder_player = [p for p in remainder_player if p not in players]
-        teams_populate = [
-            {
+        teams_populate = {
             "name":name_of_team,
             "players":players
             }
             
                 
-        ]
         team_list.append(teams_populate)
     for team in team_list:
-        pass 
+        teamname = team.get("name")
+        cursor.execute(f'''
+        CREATE TABLE IF NOT EXISTS "{teamname}"
+        
+            (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            position TEXT NOT NULL,
+            pace INTEGER NOT NULL,
+            shooting INTEGER NOT NULL,
+            passing INTEGER NOT NULL,
+            dribbling INTEGER NOT NULL,
+            defending INTEGER NOT NULL,
+            physical INTEGER NOT NULL,
+            ovr INTEGER NOT NULL,
+            value INTEGER NOT NULL,
+            fitness INTEGER NOT NULL
+            
+            )
+        
+''')    
+        conn.commit()
+        for player in team.get("players"):
+            cursor.execute(f'''INSERT INTO "{teamname}" (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ''', (player["id"],player["name"], player["position"], player["pace"], player["shooting"], player["passing"], player["dribbling"], player["defending"], player["physical"], player["ovr"], player["value"], player["fitness"]))
+        conn.commit()
+
+
+
+        
     conn.close()
     return player_list
 
