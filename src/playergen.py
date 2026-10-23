@@ -3,7 +3,7 @@ from pathlib import Path
 import sqlite3
 import checkfile
 import rewrite as re 
-
+import generateplayers
 first_names = [
 	"Aaron", "Abel", "Adrian", "Ahmed", "Alejandro", "Alex", "Alexander", "Alfredo", "Ali", "Amadou",
 	"Ander", "Andre", "Andres", "Angel", "Antonio", "Arda", "Arthur", "Asier", "Augusto", "Axel",
@@ -106,7 +106,7 @@ def populate():
         return
     elif data.get("saved") == False:
         player_list = []
-        for i in range(400):
+        for i in range(396):
             player_list.append(f"{first_names[i]} {last_names[i]}")
         print(player_list)
         conn = sqlite3.connect(root/"config"/"players.db")
@@ -196,12 +196,14 @@ def populate():
                 physical INTEGER NOT NULL,
                 ovr INTEGER NOT NULL,
                 value INTEGER NOT NULL,
-                fitness INTEGER NOT NULL
+                fitness INTEGER NOT NULL,
+                club TEXT
             )
 
 
 
         ''')
+
         for player in new_player_list:
             cursor.execute(f''' INSERT INTO players (name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness) VALUES (?,?,?,?,?,?,?,?,?,?,?) ''', (player["name"], player["position"], player["pace"], player["shooting"], player["passing"], player["dribbling"], player["defending"], player["physical"], player["ovr"], player["value"], player["fitness"]))
 

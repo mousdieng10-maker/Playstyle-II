@@ -10,7 +10,7 @@ root = Path(__file__).resolve().parent
 
 def select_team_first_time():
     from transfermarket import reformat_tuple_list
-    playergen.populate()
+    
     conn = sqlite3.connect(root/"config"/"players.db")
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM players")
@@ -33,6 +33,7 @@ def select_team_first_time():
             "fitness":player_tuple[11]
         }
         reformatted_list.append(player_dict)
+
     player_list = []
     def check_is_there(playing:list, database:list):
         player_to_add = random.choice(playing)
@@ -91,6 +92,7 @@ def select_team_first_time():
         "Scala Sporting",
         "Objective-C United",
     ]
+    immutable = team_names
     team_list = []
     remainder_player = [remaining for remaining in remainder_player if remaining not in player_list]
     for i in range(18):
@@ -123,16 +125,20 @@ def select_team_first_time():
             physical INTEGER NOT NULL,
             ovr INTEGER NOT NULL,
             value INTEGER NOT NULL,
-            fitness INTEGER NOT NULL
+            fitness INTEGER NOT NULL,
+            club TEXT 
             
             )
         
 ''')    
         conn.commit()
         for player in team.get("players"):
-            cursor.execute(f'''INSERT INTO "{teamname}" (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness) VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ''', (player["id"],player["name"], player["position"], player["pace"], player["shooting"], player["passing"], player["dribbling"], player["defending"], player["physical"], player["ovr"], player["value"], player["fitness"]))
+            cursor.execute(f'''INSERT INTO "{teamname}" (id, name, position, pace, shooting, passing, dribbling, defending, physical, ovr, value, fitness, club) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ''', (player["id"],player["name"], player["position"], player["pace"], player["shooting"], player["passing"], player["dribbling"], player["defending"], player["physical"], player["ovr"], player["value"], player["fitness"],teamname))
         conn.commit()
-
+    cursor.execute('''DELETE FROM players''')
+    for teams in immutable:
+        cursor.execute(f'''INSERT INTO players SELECT * FROM "{teams}"''')
+    conn.commit()
 
 
         

@@ -39,7 +39,7 @@ class Api():
                 all_players.append(player_dict)
             return all_players
         else:
-            
+            playergen.populate()
             starting_eleven  = select_team_first_time()
             data["saved"] = True
             re.write(root/"config"/"saved.json", data)
